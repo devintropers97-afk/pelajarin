@@ -1,0 +1,121 @@
+/**
+ * SITUNEO DIGITAL - ANIMATIONS
+ * Transcendent Luxury / Quantum Aesthetic
+ * Smooth & Elegant Transitions
+ */
+
+/* ===== FADE IN ===== */
+.fade-in {
+    animation: fadeIn 0.6s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.fade-in-up {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== FLOAT ANIMATION ===== */
+.float {
+    animation: float var(--anim-float) ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+/* ===== GLOW PULSE ===== */
+.glow-pulse {
+    animation: glowPulse var(--anim-glow) ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+    0%, 100% {
+        box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(212, 175, 55, 0.8);
+    }
+}
+
+/* ===== SHIMMER TEXT ===== */
+.shimmer {
+    background: var(--gradient-gold);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer var(--anim-shimmer) linear infinite;
+}
+
+@keyframes shimmer {
+    to {
+        background-position: 200% center;
+    }
+}
+
+/* ===== REVEAL ON SCROLL ===== */
+.reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.6s ease;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ===== HOVER LIFT ===== */
+.hover-lift {
+    transition: all var(--transition-smooth);
+}
+
+.hover-lift:hover {
+    transform: translateY(-10px);
+}
+
+/* ===== SPIN ===== */
+.spin {
+    animation: spin var(--anim-spin) linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* ===== SCALE IN ===== */
+.scale-in {
+    animation: scaleIn 0.5s ease-out;
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
