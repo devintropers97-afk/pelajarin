@@ -1,0 +1,20 @@
+# robots.txt for SITUNEO DIGITAL
+User-agent: *
+Allow: /
+
+# Disallow admin and private areas
+Disallow: /admin/
+Disallow: /api/
+Disallow: /config/
+Disallow: /database/
+Disallow: /includes/
+Disallow: /uploads/payment-proofs/
+Disallow: /installer.php
+
+# Allow public pages
+Allow: /pages/
+Allow: /assets/
+Allow: /demo/
+
+# Sitemap
+Sitemap: https://situneo.my.id/sitemap.xml

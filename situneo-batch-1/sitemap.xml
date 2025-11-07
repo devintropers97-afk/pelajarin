@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <!-- Homepage -->
+    <url>
+        <loc>https://situneo.my.id/</loc>
+        <lastmod>2025-11-08</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+    </url>
+
+    <!-- About -->
+    <url>
+        <loc>https://situneo.my.id/pages/about.php</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Services -->
+    <url>
+        <loc>https://situneo.my.id/pages/services.php</loc>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+    <!-- Portfolio -->
+    <url>
+        <loc>https://situneo.my.id/pages/portfolio.php</loc>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Pricing -->
+    <url>
+        <loc>https://situneo.my.id/pages/pricing.php</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+    <!-- Calculator -->
+    <url>
+        <loc>https://situneo.my.id/pages/calculator.php</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <!-- Contact -->
+    <url>
+        <loc>https://situneo.my.id/pages/contact.php</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <!-- Blog -->
+    <url>
+        <loc>https://situneo.my.id/pages/blog.php</loc>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <!-- Demo Websites (will be auto-generated) -->
+    <!-- Add more URLs dynamically -->
+</urlset>
