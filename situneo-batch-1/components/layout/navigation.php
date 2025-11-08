@@ -1,134 +1,95 @@
-<!-- Navigation Bar -->
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+<!-- Premium Navigation -->
+<nav class="navbar-premium" id="navbar">
     <div class="container">
-        <!-- Logo -->
-        <a class="navbar-brand d-flex align-items-center" href="<?php echo SITE_URL; ?>">
-            <div class="logo-wrapper">
-                <span class="logo-text">
-                    <span class="situ">SITU</span><span class="neo">NEO</span>
-                </span>
-                <span class="logo-tagline">Website Era Baru</span>
-            </div>
-        </a>
+        <div class="nav-wrapper">
+            <!-- Logo -->
+            <a href="index-new.php" class="nav-logo">
+                <i class="fas fa-globe"></i>
+                <span>SITUNEO</span>
+            </a>
 
-        <!-- Mobile Toggle Button -->
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+            <!-- Desktop Menu -->
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index-new.php" class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'index-new.php') ? 'active' : ''; ?>"><?php echo $t['nav_home'] ?? 'Beranda'; ?></a></li>
+                <li><a href="about-new.php" class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'about-new.php') ? 'active' : ''; ?>"><?php echo $t['nav_about'] ?? 'Tentang'; ?></a></li>
+                <li><a href="services-new.php" class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'services-new.php') ? 'active' : ''; ?>"><?php echo $t['nav_services'] ?? 'Layanan'; ?></a></li>
+                <li><a href="portfolio-new.php" class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'portfolio-new.php') ? 'active' : ''; ?>"><?php echo $t['nav_portfolio'] ?? 'Portfolio'; ?></a></li>
+                <li><a href="pricing-new.php" class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'pricing-new.php') ? 'active' : ''; ?>"><?php echo $t['nav_pricing'] ?? 'Harga'; ?></a></li>
+                <li><a href="blog-new.php" class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'blog-new.php') ? 'active' : ''; ?>"><?php echo $t['nav_blog'] ?? 'Blog'; ?></a></li>
+                <li><a href="contact-new.php" class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'contact-new.php') ? 'active' : ''; ?>"><?php echo $t['nav_contact'] ?? 'Kontak'; ?></a></li>
+            </ul>
 
-        <!-- Navigation Menu -->
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto align-items-lg-center">
-                <li class="nav-item">
-                    <a class="nav-link <?php echo ($current_page ?? '') === 'home' ? 'active' : ''; ?>"
-                       href="<?php echo SITE_URL; ?>">
-                        <i class="bi bi-house-door me-1"></i> Beranda
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link <?php echo ($current_page ?? '') === 'about' ? 'active' : ''; ?>"
-                       href="<?php echo SITE_URL; ?>/pages/about.php">
-                        <i class="bi bi-info-circle me-1"></i> Tentang Kami
-                    </a>
-                </li>
-
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle <?php echo in_array($current_page ?? '', ['services', 'service-detail']) ? 'active' : ''; ?>"
-                       href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="bi bi-grid-3x3-gap me-1"></i> Layanan
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="servicesDropdown">
-                        <li><a class="dropdown-item" href="<?php echo SITE_URL; ?>/pages/services.php">
-                            <i class="bi bi-list-ul me-2"></i> Semua Layanan
-                        </a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="<?php echo SITE_URL; ?>/pages/services.php?category=company-profile">
-                            <i class="bi bi-building me-2"></i> Company Profile
-                        </a></li>
-                        <li><a class="dropdown-item" href="<?php echo SITE_URL; ?>/pages/services.php?category=ecommerce">
-                            <i class="bi bi-cart me-2"></i> E-Commerce
-                        </a></li>
-                        <li><a class="dropdown-item" href="<?php echo SITE_URL; ?>/pages/services.php?category=education">
-                            <i class="bi bi-mortarboard me-2"></i> Pendidikan
-                        </a></li>
-                        <li><a class="dropdown-item" href="<?php echo SITE_URL; ?>/pages/services.php?category=landing-page">
-                            <i class="bi bi-rocket me-2"></i> Landing Page
-                        </a></li>
-                    </ul>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link <?php echo ($current_page ?? '') === 'portfolio' ? 'active' : ''; ?>"
-                       href="<?php echo SITE_URL; ?>/pages/portfolio.php">
-                        <i class="bi bi-briefcase me-1"></i> Portfolio
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link <?php echo ($current_page ?? '') === 'pricing' ? 'active' : ''; ?>"
-                       href="<?php echo SITE_URL; ?>/pages/pricing.php">
-                        <i class="bi bi-tag me-1"></i> Harga
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link <?php echo ($current_page ?? '') === 'calculator' ? 'active' : ''; ?>"
-                       href="<?php echo SITE_URL; ?>/pages/calculator.php">
-                        <i class="bi bi-calculator me-1"></i> Kalkulator
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link <?php echo ($current_page ?? '') === 'blog' ? 'active' : ''; ?>"
-                       href="<?php echo SITE_URL; ?>/pages/blog.php">
-                        <i class="bi bi-journal-text me-1"></i> Blog
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link <?php echo ($current_page ?? '') === 'contact' ? 'active' : ''; ?>"
-                       href="<?php echo SITE_URL; ?>/pages/contact.php">
-                        <i class="bi bi-envelope me-1"></i> Kontak
-                    </a>
-                </li>
-
+            <!-- Right Actions -->
+            <div class="nav-actions">
                 <!-- Language Switcher -->
-                <li class="nav-item dropdown ms-lg-2">
-                    <a class="nav-link dropdown-toggle lang-switcher" href="#" id="langDropdown"
-                       role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="bi bi-translate me-1"></i>
-                        <span class="lang-code"><?php echo strtoupper($lang ?? 'ID'); ?></span>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="langDropdown">
-                        <li><a class="dropdown-item <?php echo ($lang ?? 'id') === 'id' ? 'active' : ''; ?>"
-                               href="?lang=id">
-                            <i class="bi bi-flag me-2"></i> Indonesia
-                        </a></li>
-                        <li><a class="dropdown-item <?php echo ($lang ?? 'id') === 'en' ? 'active' : ''; ?>"
-                               href="?lang=en">
-                            <i class="bi bi-flag-fill me-2"></i> English
-                        </a></li>
-                    </ul>
-                </li>
+                <div class="lang-switcher">
+                    <button class="lang-btn <?php echo $lang === 'id' ? 'active' : ''; ?>" onclick="switchLanguage('id')">
+                        <span class="flag">🇮🇩</span> ID
+                    </button>
+                    <button class="lang-btn <?php echo $lang === 'en' ? 'active' : ''; ?>" onclick="switchLanguage('en')">
+                        <span class="flag">🇺🇸</span> EN
+                    </button>
+                </div>
 
                 <!-- CTA Button -->
-                <li class="nav-item ms-lg-3">
-                    <?php if (isLoggedIn()): ?>
-                        <a class="btn btn-gradient-gold btn-sm" href="<?php echo SITE_URL; ?>/client/dashboard.php">
-                            <i class="bi bi-speedometer2 me-1"></i> Dashboard
-                        </a>
-                    <?php else: ?>
-                        <a class="btn btn-gradient-gold btn-sm" href="<?php echo SITE_URL; ?>/auth/login.php">
-                            <i class="bi bi-box-arrow-in-right me-1"></i> Masuk
-                        </a>
-                    <?php endif; ?>
-                </li>
-            </ul>
+                <a href="auth/login.php" class="btn-primary-nav">
+                    <i class="fas fa-user"></i>
+                    <span><?php echo $t['nav_login'] ?? 'Masuk'; ?></span>
+                </a>
+
+                <!-- Mobile Menu Toggle -->
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
         </div>
     </div>
 </nav>
 
-<!-- Progress Bar on Scroll -->
-<div class="scroll-progress-bar" id="scrollProgressBar"></div>
+<!-- NIB Badge (RED gradient with pulse) -->
+<div class="nib-badge">
+    <div class="nib-badge-content">
+        <i class="fas fa-certificate"></i>
+        <div class="nib-badge-text">
+            <div class="nib-label"><?php echo $t['nib_label'] ?? 'NIB Terdaftar'; ?></div>
+            <div class="nib-number">1234567890123</div>
+        </div>
+    </div>
+    <div class="nib-pulse"></div>
+</div>
+
+<script>
+// Language Switcher Function
+function switchLanguage(newLang) {
+    const currentUrl = window.location.href;
+    const url = new URL(currentUrl);
+    url.searchParams.set('lang', newLang);
+    window.location.href = url.toString();
+}
+
+// Mobile Menu Toggle
+document.addEventListener('DOMContentLoaded', function() {
+    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+    const navMenu = document.getElementById('navMenu');
+
+    if (mobileMenuToggle) {
+        mobileMenuToggle.addEventListener('click', function() {
+            this.classList.toggle('active');
+            navMenu.classList.toggle('active');
+            document.body.classList.toggle('menu-open');
+        });
+    }
+
+    // Close menu when clicking outside
+    document.addEventListener('click', function(event) {
+        const navbar = document.querySelector('.navbar-premium');
+        if (!navbar.contains(event.target) && navMenu.classList.contains('active')) {
+            mobileMenuToggle.classList.remove('active');
+            navMenu.classList.remove('active');
+            document.body.classList.remove('menu-open');
+        }
+    });
+});
+</script>

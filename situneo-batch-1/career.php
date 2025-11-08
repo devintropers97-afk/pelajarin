@@ -8,8 +8,8 @@ $t = ['id' => ['page_title' => 'Karir', 'nav_home' => 'Beranda', 'nav_about' => 
 $pageTitle = $t['page_title'] . ' - SITUNEO';
 $baseURL = '/';
 
-include 'components/layout/header-new.php';
-include 'components/layout/navigation-new.php';
+include 'components/layout/header.php';
+include 'components/layout/navigation.php';
 ?>
 
 <section class="hero" style="padding-top: 140px; padding-bottom: 60px;">
@@ -147,12 +147,12 @@ include 'components/layout/navigation-new.php';
 </section>
 
 <?php
-include 'components/layout/footer-new.php';
-include 'components/layout/whatsapp-float-new.php';
+include 'components/layout/footer.php';
+include 'components/layout/whatsapp-float.php';
 ?>
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script src="assets/js/main-new.js"></script>
+<script src="assets/js/main.js"></script>
 
 </body>
 </html>

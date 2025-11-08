@@ -1,290 +1,143 @@
-<!-- WhatsApp Floating Button -->
+<!-- WhatsApp Float Button -->
 <div class="whatsapp-float" id="whatsappFloat">
-    <a href="https://wa.me/<?php echo str_replace(['+', '-', ' '], '', WHATSAPP_NUMBER); ?>?text=<?php echo urlencode(WHATSAPP_DEFAULT_MESSAGE); ?>"
-       target="_blank"
-       rel="noopener noreferrer"
-       class="whatsapp-button"
-       title="Chat via WhatsApp"
-       aria-label="Chat via WhatsApp">
-        <i class="bi bi-whatsapp"></i>
-        <span class="whatsapp-pulse"></span>
-    </a>
+    <button class="whatsapp-btn" id="whatsappBtn">
+        <i class="fab fa-whatsapp"></i>
+        <div class="whatsapp-pulse"></div>
+    </button>
 
-    <!-- WhatsApp Chat Popup (Optional) -->
+    <!-- WhatsApp Popup Chat Preview -->
     <div class="whatsapp-popup" id="whatsappPopup">
         <div class="whatsapp-popup-header">
-            <div class="d-flex align-items-center">
-                <div class="whatsapp-avatar me-2">
-                    <i class="bi bi-headset"></i>
-                </div>
-                <div>
-                    <h6 class="mb-0">Customer Service</h6>
-                    <small class="text-success">
-                        <i class="bi bi-circle-fill" style="font-size: 0.5rem;"></i> Online
-                    </small>
-                </div>
+            <div class="whatsapp-avatar">
+                <img src="https://ui-avatars.com/api/?name=SITUNEO+Support&background=25D366&color=fff&size=40" alt="Support">
+                <span class="online-indicator"></span>
             </div>
-            <button class="whatsapp-close" id="whatsappClose" aria-label="Close chat">
-                <i class="bi bi-x"></i>
+            <div class="whatsapp-info">
+                <h5>SITUNEO Support</h5>
+                <p><?php echo $t['whatsapp_status'] ?? 'Online - Siap Membantu'; ?></p>
+            </div>
+            <button class="whatsapp-close" id="whatsappClose">
+                <i class="fas fa-times"></i>
             </button>
         </div>
-
         <div class="whatsapp-popup-body">
-            <div class="chat-message">
-                <div class="chat-bubble">
-                    <p class="mb-2">👋 Halo! Selamat datang di SITUNEO.</p>
-                    <p class="mb-0">
-                        Ada yang bisa kami bantu? Klik tombol di bawah untuk chat langsung dengan tim kami.
-                    </p>
+            <div class="whatsapp-message">
+                <div class="message-bubble">
+                    <p><?php echo $t['whatsapp_greeting'] ?? 'Halo! 👋 Ada yang bisa kami bantu?'; ?></p>
+                    <span class="message-time">
+                        <?php echo date('H:i'); ?>
+                    </span>
                 </div>
-                <small class="chat-time"><?php echo date('H:i'); ?></small>
             </div>
         </div>
-
         <div class="whatsapp-popup-footer">
-            <a href="https://wa.me/<?php echo str_replace(['+', '-', ' '], '', WHATSAPP_NUMBER); ?>?text=<?php echo urlencode(WHATSAPP_DEFAULT_MESSAGE); ?>"
-               target="_blank"
-               rel="noopener noreferrer"
-               class="btn btn-success w-100">
-                <i class="bi bi-whatsapp me-2"></i>
-                Mulai Chat
+            <a href="https://wa.me/6281234567890?text=<?php echo urlencode($t['whatsapp_default_message'] ?? 'Halo SITUNEO, saya tertarik dengan layanan Anda.'); ?>" target="_blank" class="whatsapp-send-btn">
+                <i class="fab fa-whatsapp"></i>
+                <span><?php echo $t['whatsapp_chat_now'] ?? 'Chat Sekarang'; ?></span>
             </a>
         </div>
     </div>
 </div>
 
-<style>
-/* WhatsApp Floating Button Styles */
-.whatsapp-float {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    z-index: 9999;
-}
+<!-- Order Notification Popup (Random) -->
+<div class="order-notification" id="orderNotification">
+    <div class="order-notification-content">
+        <div class="order-icon">
+            <i class="fas fa-shopping-cart"></i>
+        </div>
+        <div class="order-info">
+            <p class="order-name" id="orderName">Budi Santoso</p>
+            <p class="order-service" id="orderService"><?php echo $t['order_purchased'] ?? 'Baru saja memesan'; ?> <strong>Website Company Profile</strong></p>
+            <p class="order-time" id="orderTime">5 <?php echo $t['minutes_ago'] ?? 'menit yang lalu'; ?></p>
+        </div>
+        <button class="order-close" id="orderClose">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+</div>
 
-.whatsapp-button {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 60px;
-    height: 60px;
-    background: linear-gradient(135deg, #25D366, #128C7E);
-    color: white;
-    border-radius: 50%;
-    font-size: 28px;
-    box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
-    transition: all 0.3s ease;
-    text-decoration: none;
-}
-
-.whatsapp-button:hover {
-    transform: scale(1.1);
-    box-shadow: 0 6px 30px rgba(37, 211, 102, 0.6);
-    color: white;
-}
-
-.whatsapp-button i {
-    animation: pulse-icon 2s ease-in-out infinite;
-}
-
-@keyframes pulse-icon {
-    0%, 100% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.1);
-    }
-}
-
-.whatsapp-pulse {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    background: rgba(37, 211, 102, 0.3);
-    animation: pulse-ring 2s ease-out infinite;
-    pointer-events: none;
-}
-
-@keyframes pulse-ring {
-    0% {
-        transform: scale(1);
-        opacity: 1;
-    }
-    100% {
-        transform: scale(1.5);
-        opacity: 0;
-    }
-}
-
-/* WhatsApp Popup */
-.whatsapp-popup {
-    position: absolute;
-    bottom: 80px;
-    right: 0;
-    width: 320px;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(20px);
-    transition: all 0.3s ease;
-}
-
-.whatsapp-popup.show {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}
-
-.whatsapp-popup-header {
-    background: linear-gradient(135deg, #25D366, #128C7E);
-    color: white;
-    padding: 15px;
-    border-radius: 12px 12px 0 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.whatsapp-avatar {
-    width: 40px;
-    height: 40px;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-}
-
-.whatsapp-close {
-    background: transparent;
-    border: none;
-    color: white;
-    font-size: 24px;
-    cursor: pointer;
-    padding: 0;
-    width: 30px;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    transition: background 0.2s;
-}
-
-.whatsapp-close:hover {
-    background: rgba(255, 255, 255, 0.1);
-}
-
-.whatsapp-popup-body {
-    padding: 20px;
-    background: #e5ddd5;
-    min-height: 150px;
-}
-
-.chat-message {
-    margin-bottom: 15px;
-}
-
-.chat-bubble {
-    background: white;
-    padding: 12px 15px;
-    border-radius: 8px;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-    position: relative;
-}
-
-.chat-bubble::before {
-    content: '';
-    position: absolute;
-    left: -8px;
-    top: 10px;
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 0 8px 8px 0;
-    border-color: transparent white transparent transparent;
-}
-
-.chat-time {
-    display: block;
-    color: #667781;
-    margin-top: 5px;
-    font-size: 11px;
-}
-
-.whatsapp-popup-footer {
-    padding: 15px;
-    border-top: 1px solid #e0e0e0;
-}
-
-/* Mobile Responsive */
-@media (max-width: 576px) {
-    .whatsapp-float {
-        bottom: 20px;
-        right: 20px;
-    }
-
-    .whatsapp-button {
-        width: 55px;
-        height: 55px;
-        font-size: 26px;
-    }
-
-    .whatsapp-popup {
-        width: calc(100vw - 40px);
-        right: -10px;
-    }
-}
-</style>
+<!-- Back to Top Button -->
+<button class="back-to-top" id="backToTop">
+    <i class="fas fa-arrow-up"></i>
+</button>
 
 <script>
 // WhatsApp Popup Toggle
 document.addEventListener('DOMContentLoaded', function() {
-    const whatsappButton = document.querySelector('.whatsapp-button');
+    const whatsappBtn = document.getElementById('whatsappBtn');
     const whatsappPopup = document.getElementById('whatsappPopup');
     const whatsappClose = document.getElementById('whatsappClose');
 
-    // Show popup on button click (optional feature)
-    // Uncomment if you want popup instead of direct WhatsApp link
-    /*
-    whatsappButton.addEventListener('click', function(e) {
-        e.preventDefault();
-        whatsappPopup.classList.toggle('show');
-    });
+    if (whatsappBtn) {
+        whatsappBtn.addEventListener('click', function() {
+            whatsappPopup.classList.toggle('active');
+        });
+    }
 
-    whatsappClose.addEventListener('click', function() {
-        whatsappPopup.classList.remove('show');
-    });
+    if (whatsappClose) {
+        whatsappClose.addEventListener('click', function() {
+            whatsappPopup.classList.remove('active');
+        });
+    }
 
     // Close popup when clicking outside
-    document.addEventListener('click', function(e) {
-        if (!whatsappButton.contains(e.target) && !whatsappPopup.contains(e.target)) {
-            whatsappPopup.classList.remove('show');
+    document.addEventListener('click', function(event) {
+        const whatsappFloat = document.getElementById('whatsappFloat');
+        if (!whatsappFloat.contains(event.target) && whatsappPopup.classList.contains('active')) {
+            whatsappPopup.classList.remove('active');
         }
     });
-    */
+});
 
-    // Show/hide button on scroll
-    let lastScroll = 0;
-    const whatsappFloat = document.getElementById('whatsappFloat');
+// Order Notification - Random Popup
+const orderData = [
+    { name: 'Budi Santoso', service: '<?php echo $t['service_company_profile'] ?? 'Website Company Profile'; ?>', time: '5 <?php echo $t['minutes_ago'] ?? 'menit yang lalu'; ?>' },
+    { name: 'Siti Nurhaliza', service: '<?php echo $t['service_online_store'] ?? 'Toko Online'; ?>', time: '12 <?php echo $t['minutes_ago'] ?? 'menit yang lalu'; ?>' },
+    { name: 'Ahmad Yani', service: '<?php echo $t['service_landing_page'] ?? 'Landing Page'; ?>', time: '23 <?php echo $t['minutes_ago'] ?? 'menit yang lalu'; ?>' },
+    { name: 'Dewi Lestari', service: '<?php echo $t['service_blog'] ?? 'Website Blog'; ?>', time: '35 <?php echo $t['minutes_ago'] ?? 'menit yang lalu'; ?>' },
+    { name: 'Rudi Hartono', service: '<?php echo $t['service_portfolio'] ?? 'Website Portfolio'; ?>', time: '48 <?php echo $t['minutes_ago'] ?? 'menit yang lalu'; ?>' }
+];
 
-    window.addEventListener('scroll', function() {
-        const currentScroll = window.pageYOffset;
+function showOrderNotification() {
+    const notification = document.getElementById('orderNotification');
+    const randomOrder = orderData[Math.floor(Math.random() * orderData.length)];
 
-        if (currentScroll <= 100) {
-            whatsappFloat.style.opacity = '0';
-            whatsappFloat.style.pointerEvents = 'none';
-        } else {
-            whatsappFloat.style.opacity = '1';
-            whatsappFloat.style.pointerEvents = 'auto';
-        }
+    document.getElementById('orderName').textContent = randomOrder.name;
+    document.getElementById('orderService').innerHTML = '<?php echo $t['order_purchased'] ?? 'Baru saja memesan'; ?> <strong>' + randomOrder.service + '</strong>';
+    document.getElementById('orderTime').textContent = randomOrder.time;
 
-        lastScroll = currentScroll;
+    notification.classList.add('show');
+
+    setTimeout(() => {
+        notification.classList.remove('show');
+    }, 8000);
+}
+
+// Show notification randomly
+setTimeout(() => {
+    showOrderNotification();
+    setInterval(showOrderNotification, 45000); // Every 45 seconds
+}, 5000); // First show after 5 seconds
+
+// Close order notification
+document.getElementById('orderClose').addEventListener('click', function() {
+    document.getElementById('orderNotification').classList.remove('show');
+});
+
+// Back to Top Button
+window.addEventListener('scroll', function() {
+    const backToTop = document.getElementById('backToTop');
+    if (window.pageYOffset > 300) {
+        backToTop.classList.add('show');
+    } else {
+        backToTop.classList.remove('show');
+    }
+});
+
+document.getElementById('backToTop').addEventListener('click', function() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
     });
 });
 </script>

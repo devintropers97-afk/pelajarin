@@ -1,576 +1,680 @@
 /**
  * SITUNEO - Main JavaScript
- * Website Era Baru untuk Bisnis Digital
+ * Following "fix wajib" design exactly
  */
 
 (function() {
     'use strict';
 
-    // ========================================
-    // 1. INITIALIZATION
-    // ========================================
-    document.addEventListener('DOMContentLoaded', function() {
-        initAOS();
-        initGSAP();
-        initParticleNetwork();
-        initNavigation();
-        initScrollProgress();
-        initBackToTop();
-        initNewsletter();
-        initLazyLoading();
-        initSmoothScroll();
+    /* ==========================================================================
+       LOADING SCREEN
+       ========================================================================== */
+    window.addEventListener('load', function() {
+        const loadingScreen = document.getElementById('loading-screen');
+
+        setTimeout(function() {
+            loadingScreen.classList.add('hidden');
+
+            // Remove from DOM after animation
+            setTimeout(function() {
+                if (loadingScreen && loadingScreen.parentNode) {
+                    loadingScreen.parentNode.removeChild(loadingScreen);
+                }
+            }, 500);
+        }, 1500);
     });
 
-    // ========================================
-    // 2. AOS (Animate On Scroll) INIT
-    // ========================================
-    function initAOS() {
-        if (typeof AOS !== 'undefined') {
-            AOS.init({
-                duration: 800,
-                easing: 'ease-in-out',
-                once: true,
-                offset: 100,
-                delay: 100
-            });
-        }
-    }
+    /* ==========================================================================
+       NETWORK PARTICLE BACKGROUND (80 PARTICLES)
+       ========================================================================== */
+    class NetworkBackground {
+        constructor() {
+            this.canvas = document.getElementById('network-canvas');
+            if (!this.canvas) return;
 
-    // ========================================
-    // 3. GSAP ANIMATIONS
-    // ========================================
-    function initGSAP() {
-        if (typeof gsap === 'undefined') return;
+            this.ctx = this.canvas.getContext('2d');
+            this.particles = [];
+            this.particleCount = 80;
+            this.connectionDistance = 150;
+            this.mouse = { x: null, y: null, radius: 150 };
 
-        // Register ScrollTrigger plugin
-        if (typeof ScrollTrigger !== 'undefined') {
-            gsap.registerPlugin(ScrollTrigger);
+            this.init();
+            this.animate();
+            this.setupEventListeners();
         }
 
-        // Animate hero elements
-        const heroTimeline = gsap.timeline({ defaults: { ease: 'power3.out' } });
-
-        if (document.querySelector('.hero-subtitle')) {
-            heroTimeline.from('.hero-subtitle', {
-                y: 50,
-                opacity: 0,
-                duration: 0.8
-            });
+        init() {
+            this.resize();
+            this.createParticles();
         }
 
-        if (document.querySelector('.hero-title')) {
-            heroTimeline.from('.hero-title', {
-                y: 50,
-                opacity: 0,
-                duration: 0.8
-            }, '-=0.4');
+        resize() {
+            this.canvas.width = window.innerWidth;
+            this.canvas.height = window.innerHeight;
         }
 
-        if (document.querySelector('.hero-description')) {
-            heroTimeline.from('.hero-description', {
-                y: 50,
-                opacity: 0,
-                duration: 0.8
-            }, '-=0.4');
-        }
-
-        if (document.querySelector('.hero-cta')) {
-            heroTimeline.from('.hero-cta', {
-                y: 50,
-                opacity: 0,
-                duration: 0.8
-            }, '-=0.4');
-        }
-
-        if (document.querySelector('.hero-stats')) {
-            heroTimeline.from('.hero-stats', {
-                y: 50,
-                opacity: 0,
-                duration: 0.8
-            }, '-=0.2');
-        }
-
-        // Animate cards on scroll
-        const cards = document.querySelectorAll('.card');
-        cards.forEach((card, index) => {
-            gsap.from(card, {
-                scrollTrigger: {
-                    trigger: card,
-                    start: 'top 80%',
-                    toggleActions: 'play none none none'
-                },
-                y: 50,
-                opacity: 0,
-                duration: 0.6,
-                delay: index * 0.1
-            });
-        });
-
-        // Parallax effect for sections
-        const sections = document.querySelectorAll('.section');
-        sections.forEach(section => {
-            gsap.to(section, {
-                scrollTrigger: {
-                    trigger: section,
-                    start: 'top bottom',
-                    end: 'bottom top',
-                    scrub: 1
-                },
-                y: -50,
-                ease: 'none'
-            });
-        });
-    }
-
-    // ========================================
-    // 4. PARTICLE NETWORK BACKGROUND
-    // ========================================
-    function initParticleNetwork() {
-        const canvas = document.getElementById('particle-canvas');
-        if (!canvas) return;
-
-        const ctx = canvas.getContext('2d');
-        let particlesArray = [];
-        let mouse = {
-            x: null,
-            y: null,
-            radius: 150
-        };
-
-        // Set canvas size
-        function setCanvasSize() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        setCanvasSize();
-
-        // Mouse move event
-        window.addEventListener('mousemove', function(e) {
-            mouse.x = e.x;
-            mouse.y = e.y;
-        });
-
-        // Resize event
-        window.addEventListener('resize', function() {
-            setCanvasSize();
-            init();
-        });
-
-        // Particle class
-        class Particle {
-            constructor(x, y, directionX, directionY, size, color) {
-                this.x = x;
-                this.y = y;
-                this.directionX = directionX;
-                this.directionY = directionY;
-                this.size = size;
-                this.color = color;
+        createParticles() {
+            this.particles = [];
+            for (let i = 0; i < this.particleCount; i++) {
+                this.particles.push({
+                    x: Math.random() * this.canvas.width,
+                    y: Math.random() * this.canvas.height,
+                    vx: (Math.random() - 0.5) * 0.5,
+                    vy: (Math.random() - 0.5) * 0.5,
+                    radius: Math.random() * 2 + 1
+                });
             }
+        }
 
-            // Draw particle
-            draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
-                ctx.fillStyle = this.color;
-                ctx.fill();
+        connectParticles() {
+            for (let i = 0; i < this.particles.length; i++) {
+                for (let j = i + 1; j < this.particles.length; j++) {
+                    const dx = this.particles[i].x - this.particles[j].x;
+                    const dy = this.particles[i].y - this.particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < this.connectionDistance) {
+                        const opacity = 1 - (distance / this.connectionDistance);
+                        this.ctx.strokeStyle = `rgba(255, 180, 0, ${opacity * 0.2})`;
+                        this.ctx.lineWidth = 1;
+                        this.ctx.beginPath();
+                        this.ctx.moveTo(this.particles[i].x, this.particles[i].y);
+                        this.ctx.lineTo(this.particles[j].x, this.particles[j].y);
+                        this.ctx.stroke();
+                    }
+                }
             }
+        }
 
-            // Update particle position
-            update() {
+        updateParticles() {
+            for (let particle of this.particles) {
+                particle.x += particle.vx;
+                particle.y += particle.vy;
+
                 // Bounce off edges
-                if (this.x + this.size > canvas.width || this.x - this.size < 0) {
-                    this.directionX = -this.directionX;
+                if (particle.x < 0 || particle.x > this.canvas.width) {
+                    particle.vx = -particle.vx;
                 }
-                if (this.y + this.size > canvas.height || this.y - this.size < 0) {
-                    this.directionY = -this.directionY;
-                }
-
-                // Check collision with mouse
-                let dx = mouse.x - this.x;
-                let dy = mouse.y - this.y;
-                let distance = Math.sqrt(dx * dx + dy * dy);
-
-                if (distance < mouse.radius + this.size) {
-                    if (mouse.x < this.x && this.x < canvas.width - this.size * 10) {
-                        this.x += 10;
-                    }
-                    if (mouse.x > this.x && this.x > this.size * 10) {
-                        this.x -= 10;
-                    }
-                    if (mouse.y < this.y && this.y < canvas.height - this.size * 10) {
-                        this.y += 10;
-                    }
-                    if (mouse.y > this.y && this.y > this.size * 10) {
-                        this.y -= 10;
-                    }
+                if (particle.y < 0 || particle.y > this.canvas.height) {
+                    particle.vy = -particle.vy;
                 }
 
-                // Move particle
-                this.x += this.directionX;
-                this.y += this.directionY;
+                // Mouse interaction
+                if (this.mouse.x !== null && this.mouse.y !== null) {
+                    const dx = this.mouse.x - particle.x;
+                    const dy = this.mouse.y - particle.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
 
-                // Draw particle
-                this.draw();
-            }
-        }
-
-        // Create particles
-        function init() {
-            particlesArray = [];
-            let numberOfParticles = (canvas.width * canvas.height) / 15000;
-
-            for (let i = 0; i < numberOfParticles; i++) {
-                let size = (Math.random() * 3) + 1;
-                let x = (Math.random() * ((canvas.width - size * 2) - (size * 2)) + size * 2);
-                let y = (Math.random() * ((canvas.height - size * 2) - (size * 2)) + size * 2);
-                let directionX = (Math.random() * 0.4) - 0.2;
-                let directionY = (Math.random() * 0.4) - 0.2;
-                let color = 'rgba(30, 92, 153, 0.8)';
-
-                particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
-            }
-        }
-
-        // Connect particles
-        function connect() {
-            for (let a = 0; a < particlesArray.length; a++) {
-                for (let b = a; b < particlesArray.length; b++) {
-                    let dx = particlesArray[a].x - particlesArray[b].x;
-                    let dy = particlesArray[a].y - particlesArray[b].y;
-                    let distance = Math.sqrt(dx * dx + dy * dy);
-
-                    if (distance < 120) {
-                        let opacity = 1 - (distance / 120);
-                        ctx.strokeStyle = `rgba(255, 180, 0, ${opacity * 0.3})`;
-                        ctx.lineWidth = 1;
-                        ctx.beginPath();
-                        ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
-                        ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
-                        ctx.stroke();
+                    if (distance < this.mouse.radius) {
+                        const force = (this.mouse.radius - distance) / this.mouse.radius;
+                        particle.x -= (dx / distance) * force * 2;
+                        particle.y -= (dy / distance) * force * 2;
                     }
                 }
             }
         }
 
-        // Animation loop
-        function animate() {
-            requestAnimationFrame(animate);
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            for (let i = 0; i < particlesArray.length; i++) {
-                particlesArray[i].update();
+        drawParticles() {
+            for (let particle of this.particles) {
+                this.ctx.fillStyle = 'rgba(255, 180, 0, 0.6)';
+                this.ctx.beginPath();
+                this.ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
+                this.ctx.fill();
             }
-
-            connect();
         }
 
-        init();
-        animate();
+        animate() {
+            this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+            this.connectParticles();
+            this.updateParticles();
+            this.drawParticles();
+            requestAnimationFrame(() => this.animate());
+        }
+
+        setupEventListeners() {
+            window.addEventListener('resize', () => {
+                this.resize();
+                this.createParticles();
+            });
+
+            window.addEventListener('mousemove', (e) => {
+                this.mouse.x = e.clientX;
+                this.mouse.y = e.clientY;
+            });
+
+            window.addEventListener('mouseleave', () => {
+                this.mouse.x = null;
+                this.mouse.y = null;
+            });
+        }
     }
 
-    // ========================================
-    // 5. NAVIGATION SCROLL EFFECTS
-    // ========================================
-    function initNavigation() {
-        const navbar = document.getElementById('mainNav');
-        if (!navbar) return;
+    // Initialize Network Background
+    if (document.getElementById('network-canvas')) {
+        new NetworkBackground();
+    }
 
-        let lastScroll = 0;
+    /* ==========================================================================
+       NAVBAR SCROLL EFFECTS
+       ========================================================================== */
+    const navbar = document.getElementById('navbar');
+    let lastScrollTop = 0;
 
-        window.addEventListener('scroll', function() {
-            const currentScroll = window.pageYOffset;
+    window.addEventListener('scroll', function() {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
-            // Add scrolled class
-            if (currentScroll > 100) {
-                navbar.classList.add('scrolled');
+        // Add scrolled class
+        if (scrollTop > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+
+        lastScrollTop = scrollTop;
+    });
+
+    /* ==========================================================================
+       COUNTER ANIMATIONS
+       ========================================================================== */
+    function animateCounter(element, start, end, duration) {
+        let startTime = null;
+
+        function animation(currentTime) {
+            if (!startTime) startTime = currentTime;
+            const progress = Math.min((currentTime - startTime) / duration, 1);
+
+            const current = Math.floor(progress * (end - start) + start);
+            element.textContent = current.toLocaleString();
+
+            if (progress < 1) {
+                requestAnimationFrame(animation);
             } else {
-                navbar.classList.remove('scrolled');
+                element.textContent = end.toLocaleString();
             }
+        }
 
-            lastScroll = currentScroll;
+        requestAnimationFrame(animation);
+    }
+
+    // Intersection Observer for counters
+    const counterObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
+                entry.target.classList.add('counted');
+                const target = parseInt(entry.target.getAttribute('data-target'));
+                animateCounter(entry.target, 0, target, 2000);
+            }
         });
+    }, { threshold: 0.5 });
 
-        // Close mobile menu when clicking on a link
-        const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
-        const navbarCollapse = document.querySelector('.navbar-collapse');
+    document.querySelectorAll('.stat-number').forEach(counter => {
+        counterObserver.observe(counter);
+    });
 
-        navLinks.forEach(link => {
-            link.addEventListener('click', function() {
-                if (navbarCollapse.classList.contains('show')) {
-                    const bsCollapse = new bootstrap.Collapse(navbarCollapse);
-                    bsCollapse.hide();
+    /* ==========================================================================
+       AOS (ANIMATE ON SCROLL) INITIALIZATION
+       ========================================================================== */
+    if (typeof AOS !== 'undefined') {
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100,
+            easing: 'ease-out-cubic'
+        });
+    }
+
+    /* ==========================================================================
+       SMOOTH SCROLL FOR ANCHOR LINKS
+       ========================================================================== */
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+
+            if (href === '#' || href === '') return;
+
+            const target = document.querySelector(href);
+            if (target) {
+                e.preventDefault();
+                const offsetTop = target.offsetTop - 80;
+                window.scrollTo({
+                    top: offsetTop,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+
+    /* ==========================================================================
+       FAQ ACCORDION
+       ========================================================================== */
+    const faqItems = document.querySelectorAll('.faq-item');
+
+    faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+
+        question.addEventListener('click', () => {
+            const isActive = item.classList.contains('active');
+
+            // Close all items
+            faqItems.forEach(otherItem => {
+                otherItem.classList.remove('active');
+            });
+
+            // Open clicked item if it wasn't active
+            if (!isActive) {
+                item.classList.add('active');
+            }
+        });
+    });
+
+    /* ==========================================================================
+       PORTFOLIO FILTER
+       ========================================================================== */
+    const portfolioFilters = document.querySelectorAll('.portfolio-filter');
+    const portfolioItems = document.querySelectorAll('.portfolio-card');
+
+    if (portfolioFilters.length > 0) {
+        portfolioFilters.forEach(filter => {
+            filter.addEventListener('click', function() {
+                // Update active filter
+                portfolioFilters.forEach(f => f.classList.remove('active'));
+                this.classList.add('active');
+
+                const filterValue = this.getAttribute('data-filter');
+
+                // Filter items
+                portfolioItems.forEach(item => {
+                    if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                        item.style.display = 'block';
+                        setTimeout(() => {
+                            item.style.opacity = '1';
+                            item.style.transform = 'scale(1)';
+                        }, 10);
+                    } else {
+                        item.style.opacity = '0';
+                        item.style.transform = 'scale(0.8)';
+                        setTimeout(() => {
+                            item.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            });
+        });
+    }
+
+    /* ==========================================================================
+       SERVICE DIVISION FILTER
+       ========================================================================== */
+    const divisionFilters = document.querySelectorAll('.division-filter');
+    const serviceCards = document.querySelectorAll('.service-card');
+
+    if (divisionFilters.length > 0) {
+        divisionFilters.forEach(filter => {
+            filter.addEventListener('click', function() {
+                // Update active filter
+                divisionFilters.forEach(f => f.classList.remove('active'));
+                this.classList.add('active');
+
+                const divisionValue = this.getAttribute('data-division');
+
+                // Filter service cards
+                serviceCards.forEach(card => {
+                    if (divisionValue === 'all' || card.getAttribute('data-division') === divisionValue) {
+                        card.style.display = 'block';
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateY(0)';
+                        }, 10);
+                    } else {
+                        card.style.opacity = '0';
+                        card.style.transform = 'translateY(20px)';
+                        setTimeout(() => {
+                            card.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            });
+        });
+    }
+
+    /* ==========================================================================
+       SEARCH FUNCTIONALITY
+       ========================================================================== */
+    const searchInput = document.getElementById('serviceSearch');
+
+    if (searchInput) {
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+
+            serviceCards.forEach(card => {
+                const title = card.querySelector('.service-title').textContent.toLowerCase();
+                const desc = card.querySelector('.card-text')?.textContent.toLowerCase() || '';
+
+                if (title.includes(searchTerm) || desc.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
                 }
             });
         });
     }
 
-    // ========================================
-    // 6. SCROLL PROGRESS BAR
-    // ========================================
-    function initScrollProgress() {
-        const progressBar = document.getElementById('scrollProgressBar');
-        if (!progressBar) return;
+    /* ==========================================================================
+       PRICE CALCULATOR
+       ========================================================================== */
+    const calculatorForm = document.getElementById('calculatorForm');
 
-        window.addEventListener('scroll', function() {
-            const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (window.pageYOffset / windowHeight) * 100;
-            progressBar.style.width = scrolled + '%';
-        });
-    }
+    if (calculatorForm) {
+        const templateSelect = document.getElementById('templateSelect');
+        const categorySelect = document.getElementById('categorySelect');
+        const featuresCheckboxes = document.querySelectorAll('.feature-checkbox');
+        const estimatedPrice = document.getElementById('estimatedPrice');
 
-    // ========================================
-    // 7. BACK TO TOP BUTTON
-    // ========================================
-    function initBackToTop() {
-        const backToTop = document.getElementById('backToTop');
-        if (!backToTop) return;
+        function calculatePrice() {
+            let basePrice = 0;
 
-        window.addEventListener('scroll', function() {
-            if (window.pageYOffset > 300) {
-                backToTop.classList.add('show');
-            } else {
-                backToTop.classList.remove('show');
+            // Template price
+            if (templateSelect) {
+                const templatePrice = parseInt(templateSelect.value) || 0;
+                basePrice += templatePrice;
             }
+
+            // Category multiplier
+            if (categorySelect) {
+                const categoryMultiplier = parseFloat(categorySelect.value) || 1;
+                basePrice *= categoryMultiplier;
+            }
+
+            // Features
+            let featuresPrice = 0;
+            featuresCheckboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    featuresPrice += parseInt(checkbox.getAttribute('data-price')) || 0;
+                }
+            });
+
+            const totalPrice = basePrice + featuresPrice;
+
+            if (estimatedPrice) {
+                estimatedPrice.textContent = 'Rp ' + totalPrice.toLocaleString('id-ID');
+            }
+        }
+
+        // Event listeners
+        if (templateSelect) {
+            templateSelect.addEventListener('change', calculatePrice);
+        }
+        if (categorySelect) {
+            categorySelect.addEventListener('change', calculatePrice);
+        }
+        featuresCheckboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', calculatePrice);
         });
 
-        backToTop.addEventListener('click', function() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
+        // Initial calculation
+        calculatePrice();
     }
 
-    // ========================================
-    // 8. NEWSLETTER SUBSCRIPTION
-    // ========================================
-    function initNewsletter() {
-        const form = document.getElementById('newsletterForm');
-        if (!form) return;
+    /* ==========================================================================
+       FORM VALIDATION & SUBMISSION
+       ========================================================================== */
+    const contactForm = document.getElementById('contactForm');
 
-        form.addEventListener('submit', async function(e) {
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
 
-            const emailInput = form.querySelector('input[name="email"]');
-            const submitButton = form.querySelector('button[type="submit"]');
-            const email = emailInput.value.trim();
-
-            if (!email) return;
+            // Get form data
+            const formData = new FormData(this);
+            const submitButton = this.querySelector('button[type="submit"]');
+            const originalText = submitButton.innerHTML;
 
             // Disable button
             submitButton.disabled = true;
+            submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Mengirim...';
+
+            // Simulate API call
+            setTimeout(() => {
+                // Success
+                submitButton.innerHTML = '<i class="fas fa-check"></i> Terkirim!';
+                submitButton.style.background = '#4CAF50';
+
+                // Reset form
+                this.reset();
+
+                // Show success message
+                alert('Terima kasih! Pesan Anda telah terkirim. Tim kami akan segera menghubungi Anda.');
+
+                // Reset button
+                setTimeout(() => {
+                    submitButton.disabled = false;
+                    submitButton.innerHTML = originalText;
+                    submitButton.style.background = '';
+                }, 3000);
+            }, 2000);
+        });
+    }
+
+    /* ==========================================================================
+       CAREER APPLICATION FORM
+       ========================================================================== */
+    const careerForm = document.getElementById('careerForm');
+
+    if (careerForm) {
+        careerForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const formData = new FormData(this);
+            const submitButton = this.querySelector('button[type="submit"]');
             const originalText = submitButton.innerHTML;
-            submitButton.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Loading...';
 
-            try {
-                const response = await fetch('/api/newsletter-subscribe.php', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ email: email })
-                });
+            submitButton.disabled = true;
+            submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Mengirim...';
 
-                const data = await response.json();
+            setTimeout(() => {
+                submitButton.innerHTML = '<i class="fas fa-check"></i> Lamaran Terkirim!';
+                submitButton.style.background = '#4CAF50';
 
-                if (data.success) {
-                    showAlert('success', 'Terima kasih! Anda telah berhasil subscribe newsletter kami.');
-                    emailInput.value = '';
-                } else {
-                    showAlert('danger', data.message || 'Terjadi kesalahan. Silakan coba lagi.');
-                }
-            } catch (error) {
-                showAlert('danger', 'Terjadi kesalahan koneksi. Silakan coba lagi.');
-            } finally {
-                submitButton.disabled = false;
-                submitButton.innerHTML = originalText;
-            }
+                this.reset();
+
+                alert('Terima kasih atas lamaran Anda! Tim HR kami akan meninjau dan menghubungi Anda segera.');
+
+                setTimeout(() => {
+                    submitButton.disabled = false;
+                    submitButton.innerHTML = originalText;
+                    submitButton.style.background = '';
+                }, 3000);
+            }, 2500);
         });
     }
 
-    // ========================================
-    // 9. LAZY LOADING IMAGES
-    // ========================================
-    function initLazyLoading() {
-        if ('IntersectionObserver' in window) {
-            const imageObserver = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const img = entry.target;
-                        const src = img.getAttribute('data-src');
-
-                        if (src) {
-                            img.src = src;
-                            img.removeAttribute('data-src');
-                            img.classList.add('loaded');
-                        }
-
-                        observer.unobserve(img);
-                    }
-                });
-            });
-
-            const images = document.querySelectorAll('img[data-src]');
-            images.forEach(img => imageObserver.observe(img));
-        } else {
-            // Fallback for browsers that don't support IntersectionObserver
-            const images = document.querySelectorAll('img[data-src]');
-            images.forEach(img => {
-                const src = img.getAttribute('data-src');
-                if (src) {
-                    img.src = src;
+    /* ==========================================================================
+       IMAGE LAZY LOADING
+       ========================================================================== */
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                if (img.dataset.src) {
+                    img.src = img.dataset.src;
                     img.removeAttribute('data-src');
+                    observer.unobserve(img);
                 }
+            }
+        });
+    }, { rootMargin: '50px' });
+
+    document.querySelectorAll('img[data-src]').forEach(img => {
+        imageObserver.observe(img);
+    });
+
+    /* ==========================================================================
+       TESTIMONIAL SLIDER (if needed)
+       ========================================================================== */
+    const testimonialSlider = document.querySelector('.testimonial-slider');
+
+    if (testimonialSlider) {
+        let currentSlide = 0;
+        const slides = testimonialSlider.querySelectorAll('.testimonial-card');
+        const totalSlides = slides.length;
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.style.display = i === index ? 'block' : 'none';
             });
         }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            showSlide(currentSlide);
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            showSlide(currentSlide);
+        }
+
+        // Auto slide
+        setInterval(nextSlide, 5000);
+
+        // Navigation buttons (if exist)
+        const prevBtn = document.querySelector('.testimonial-prev');
+        const nextBtn = document.querySelector('.testimonial-next');
+
+        if (prevBtn) prevBtn.addEventListener('click', prevSlide);
+        if (nextBtn) nextBtn.addEventListener('click', nextSlide);
+
+        // Initialize
+        showSlide(currentSlide);
     }
 
-    // ========================================
-    // 10. SMOOTH SCROLL FOR ANCHOR LINKS
-    // ========================================
-    function initSmoothScroll() {
-        const links = document.querySelectorAll('a[href^="#"]');
+    /* ==========================================================================
+       PRICING TABLE HOVER EFFECTS
+       ========================================================================== */
+    const pricingCards = document.querySelectorAll('.pricing-card');
 
-        links.forEach(link => {
-            link.addEventListener('click', function(e) {
-                const href = this.getAttribute('href');
-
-                if (href === '#' || href === '#!') return;
-
-                const target = document.querySelector(href);
-
-                if (target) {
-                    e.preventDefault();
-                    const offsetTop = target.offsetTop - 80; // Account for fixed navbar
-
-                    window.scrollTo({
-                        top: offsetTop,
-                        behavior: 'smooth'
-                    });
-                }
-            });
+    pricingCards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-10px) scale(1.02)';
         });
-    }
 
-    // ========================================
-    // 11. COUNTER ANIMATION
-    // ========================================
-    function animateCounter(element, target, duration = 2000) {
-        let current = 0;
-        const increment = target / (duration / 16); // 60 FPS
-        const suffix = element.getAttribute('data-suffix') || '';
-        const prefix = element.getAttribute('data-prefix') || '';
-
-        const timer = setInterval(() => {
-            current += increment;
-
-            if (current >= target) {
-                current = target;
-                clearInterval(timer);
-            }
-
-            element.textContent = prefix + Math.floor(current).toLocaleString() + suffix;
-        }, 16);
-    }
-
-    // Initialize counters when in viewport
-    const counterElements = document.querySelectorAll('[data-count]');
-
-    if (counterElements.length > 0 && 'IntersectionObserver' in window) {
-        const counterObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const element = entry.target;
-                    const target = parseInt(element.getAttribute('data-count'));
-                    animateCounter(element, target);
-                    counterObserver.unobserve(element);
-                }
-            });
-        }, { threshold: 0.5 });
-
-        counterElements.forEach(el => counterObserver.observe(el));
-    }
-
-    // ========================================
-    // 12. ALERT HELPER
-    // ========================================
-    function showAlert(type, message) {
-        const alertDiv = document.createElement('div');
-        alertDiv.className = `alert alert-${type} alert-dismissible fade show position-fixed top-0 start-50 translate-middle-x mt-3`;
-        alertDiv.style.zIndex = '9999';
-        alertDiv.innerHTML = `
-            ${message}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        `;
-
-        document.body.appendChild(alertDiv);
-
-        setTimeout(() => {
-            alertDiv.classList.remove('show');
-            setTimeout(() => alertDiv.remove(), 300);
-        }, 5000);
-    }
-
-    // ========================================
-    // 13. FORM VALIDATION HELPER
-    // ========================================
-    window.validateForm = function(formId) {
-        const form = document.getElementById(formId);
-        if (!form) return false;
-
-        const inputs = form.querySelectorAll('input[required], textarea[required], select[required]');
-        let isValid = true;
-
-        inputs.forEach(input => {
-            if (!input.value.trim()) {
-                input.classList.add('is-invalid');
-                isValid = false;
+        card.addEventListener('mouseleave', function() {
+            if (!this.classList.contains('featured')) {
+                this.style.transform = '';
             } else {
-                input.classList.remove('is-invalid');
-                input.classList.add('is-valid');
+                this.style.transform = 'scale(1.05)';
             }
         });
+    });
 
-        // Email validation
-        const emailInputs = form.querySelectorAll('input[type="email"]');
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    /* ==========================================================================
+       BLOG SEARCH
+       ========================================================================== */
+    const blogSearch = document.getElementById('blogSearch');
 
-        emailInputs.forEach(input => {
-            if (input.value && !emailRegex.test(input.value)) {
-                input.classList.add('is-invalid');
-                isValid = false;
+    if (blogSearch) {
+        blogSearch.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const blogCards = document.querySelectorAll('.blog-card');
+
+            blogCards.forEach(card => {
+                const title = card.querySelector('.blog-title')?.textContent.toLowerCase() || '';
+                const excerpt = card.querySelector('.blog-excerpt')?.textContent.toLowerCase() || '';
+
+                if (title.includes(searchTerm) || excerpt.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    }
+
+    /* ==========================================================================
+       SCROLL ANIMATIONS
+       ========================================================================== */
+    const scrollElements = document.querySelectorAll('.scroll-animate');
+
+    const elementInView = (el, offset = 100) => {
+        const elementTop = el.getBoundingClientRect().top;
+        return (elementTop <= (window.innerHeight || document.documentElement.clientHeight) - offset);
+    };
+
+    const displayScrollElement = (element) => {
+        element.classList.add('scrolled');
+    };
+
+    const handleScrollAnimation = () => {
+        scrollElements.forEach((el) => {
+            if (elementInView(el, 100)) {
+                displayScrollElement(el);
             }
         });
-
-        return isValid;
     };
 
-    // ========================================
-    // 14. RECAPTCHA HELPER
-    // ========================================
-    window.executeRecaptcha = async function(action) {
-        if (typeof grecaptcha === 'undefined') {
-            console.warn('reCAPTCHA not loaded');
-            return null;
+    window.addEventListener('scroll', handleScrollAnimation);
+
+    /* ==========================================================================
+       PREVENT CONTEXT MENU ON IMAGES (Optional Security)
+       ========================================================================== */
+    document.querySelectorAll('img').forEach(img => {
+        img.addEventListener('contextmenu', (e) => {
+            // Uncomment to disable right-click on images
+            // e.preventDefault();
+        });
+    });
+
+    /* ==========================================================================
+       UTILITY FUNCTIONS
+       ========================================================================== */
+
+    // Format Currency
+    window.formatCurrency = function(number) {
+        return 'Rp ' + number.toLocaleString('id-ID');
+    };
+
+    // Format Date
+    window.formatDate = function(dateString) {
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        return new Date(dateString).toLocaleDateString('id-ID', options);
+    };
+
+    // Copy to Clipboard
+    window.copyToClipboard = function(text) {
+        navigator.clipboard.writeText(text).then(() => {
+            alert('Disalin ke clipboard!');
+        });
+    };
+
+    // Share on Social Media
+    window.shareOnSocial = function(platform, url, title) {
+        let shareUrl = '';
+
+        switch(platform) {
+            case 'facebook':
+                shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+                break;
+            case 'twitter':
+                shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}`;
+                break;
+            case 'linkedin':
+                shareUrl = `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(url)}&title=${encodeURIComponent(title)}`;
+                break;
+            case 'whatsapp':
+                shareUrl = `https://wa.me/?text=${encodeURIComponent(title + ' ' + url)}`;
+                break;
         }
 
-        try {
-            const token = await grecaptcha.execute(window.RECAPTCHA_SITE_KEY || '', { action: action });
-            return token;
-        } catch (error) {
-            console.error('reCAPTCHA error:', error);
-            return null;
+        if (shareUrl) {
+            window.open(shareUrl, '_blank', 'width=600,height=400');
         }
     };
 
-    // ========================================
-    // 15. EXPORT FUNCTIONS TO GLOBAL SCOPE
-    // ========================================
-    window.SITUNEO = {
-        showAlert: showAlert,
-        validateForm: validateForm,
-        executeRecaptcha: executeRecaptcha,
-        animateCounter: animateCounter
-    };
+    /* ==========================================================================
+       CONSOLE CREDITS
+       ========================================================================== */
+    console.log('%cSITUNEO', 'font-size: 48px; font-weight: bold; background: linear-gradient(90deg, #FFB400, #FFD700); -webkit-background-clip: text; -webkit-text-fill-color: transparent;');
+    console.log('%cPlatform Website Profesional Berbasis AI', 'font-size: 14px; color: #1E5C99;');
+    console.log('%cDeveloped with ❤️ by SITUNEO Team', 'font-size: 12px; color: #FFB400;');
 
 })();

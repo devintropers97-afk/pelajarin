@@ -1,103 +1,98 @@
 <!DOCTYPE html>
-<html lang="<?php echo $lang ?? 'id'; ?>">
+<html lang="<?php echo $lang === 'en' ? 'en' : 'id'; ?>">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <!-- SEO Meta Tags -->
-    <title><?php echo $page_title ?? 'SITUNEO - Website Era Baru untuk Bisnis Digital Anda'; ?></title>
-    <meta name="description" content="<?php echo $page_description ?? 'SITUNEO: Platform pembuatan website profesional dengan 1500+ template. Beli Putus Rp 350K atau Sewa Rp 150K/bulan. Website era baru untuk bisnis Anda!'; ?>">
-    <meta name="keywords" content="website, jasa pembuatan website, website murah, website profesional, situneo, digital agency">
+    <meta name="description" content="<?php echo $t['meta_description'] ?? 'SITUNEO - Jasa Pembuatan Website Profesional Berbasis AI. Platform Digital yang Menghubungkan Bisnis dengan Freelancer Terbaik.'; ?>">
+    <meta name="keywords" content="jasa pembuatan website, website profesional, jasa web design, pembuatan website murah, website bisnis, landing page, toko online, web developer Indonesia">
     <meta name="author" content="SITUNEO Digital">
+    <meta name="robots" content="index, follow">
 
-    <!-- Open Graph / Facebook -->
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="<?php echo $t['og_title'] ?? 'SITUNEO - Platform Website Profesional Berbasis AI'; ?>">
+    <meta property="og:description" content="<?php echo $t['meta_description'] ?? 'Buat website profesional dengan mudah. Hubungkan bisnis Anda dengan freelancer terbaik.'; ?>">
+    <meta property="og:image" content="<?php echo $baseURL ?? '/'; ?>assets/images/og-image.jpg">
+    <meta property="og:url" content="<?php echo (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']; ?>">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="<?php echo SITE_URL . $_SERVER['REQUEST_URI']; ?>">
-    <meta property="og:title" content="<?php echo $page_title ?? 'SITUNEO - Website Era Baru'; ?>">
-    <meta property="og:description" content="<?php echo $page_description ?? 'Platform pembuatan website profesional dengan 1500+ template'; ?>">
-    <meta property="og:image" content="<?php echo SITE_URL; ?>/assets/images/og-image.jpg">
 
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="<?php echo SITE_URL . $_SERVER['REQUEST_URI']; ?>">
-    <meta property="twitter:title" content="<?php echo $page_title ?? 'SITUNEO - Website Era Baru'; ?>">
-    <meta property="twitter:description" content="<?php echo $page_description ?? 'Platform pembuatan website profesional dengan 1500+ template'; ?>">
-    <meta property="twitter:image" content="<?php echo SITE_URL; ?>/assets/images/og-image.jpg">
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="<?php echo $t['og_title'] ?? 'SITUNEO - Platform Website Profesional'; ?>">
+    <meta name="twitter:description" content="<?php echo $t['meta_description'] ?? 'Buat website profesional dengan mudah.'; ?>">
+    <meta name="twitter:image" content="<?php echo $baseURL ?? '/'; ?>assets/images/twitter-card.jpg">
+
+    <title><?php echo $pageTitle ?? 'SITUNEO - Platform Website Profesional Berbasis AI'; ?></title>
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" sizes="32x32" href="<?php echo SITE_URL; ?>/assets/images/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="<?php echo SITE_URL; ?>/assets/images/favicon-16x16.png">
-    <link rel="apple-touch-icon" href="<?php echo SITE_URL; ?>/assets/images/apple-touch-icon.png">
-
-    <!-- Preconnect to CDNs for better performance -->
-    <link rel="preconnect" href="https://cdn.jsdelivr.net">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="icon" type="image/png" href="<?php echo $baseURL ?? '/'; ?>assets/images/favicon.png">
+    <link rel="apple-touch-icon" href="<?php echo $baseURL ?? '/'; ?>assets/images/apple-touch-icon.png">
 
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- Bootstrap 5.3.3 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
-    <!-- AOS (Animate On Scroll) -->
-    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <!-- AOS Animation Library -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
 
     <!-- Main CSS -->
-    <link rel="stylesheet" href="<?php echo SITE_URL; ?>/assets/css/main.css?v=<?php echo filemtime(__DIR__ . '/../../assets/css/main.css'); ?>">
+    <link rel="stylesheet" href="<?php echo $baseURL ?? '/'; ?>assets/css/main.css">
 
-    <!-- Page-specific CSS -->
-    <?php if (isset($page_css)): ?>
-        <link rel="stylesheet" href="<?php echo SITE_URL . $page_css; ?>?v=<?php echo filemtime(__DIR__ . '/../../' . ltrim($page_css, '/')); ?>">
-    <?php endif; ?>
+    <!-- Google reCAPTCHA -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
-    <!-- reCAPTCHA v3 -->
-    <script src="https://www.google.com/recaptcha/api.js?render=<?php echo RECAPTCHA_SITE_KEY; ?>" async defer></script>
-
-    <!-- Structured Data for SEO -->
+    <!-- Structured Data -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "Organization",
-        "name": "SITUNEO Digital",
-        "url": "<?php echo SITE_URL; ?>",
-        "logo": "<?php echo SITE_URL; ?>/assets/images/logo.png",
-        "description": "Platform pembuatan website profesional dengan 1500+ template",
-        "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "Jl. Digital No. 123",
-            "addressLocality": "Jakarta",
-            "addressCountry": "ID"
-        },
+        "name": "SITUNEO",
+        "description": "Platform Website Profesional Berbasis AI",
+        "url": "<?php echo (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST']; ?>",
+        "logo": "<?php echo $baseURL ?? '/'; ?>assets/images/logo.png",
         "contactPoint": {
             "@type": "ContactPoint",
-            "telephone": "+62-821-xxxx-xxxx",
+            "telephone": "+62-812-3456-7890",
             "contactType": "Customer Service",
+            "areaServed": "ID",
             "availableLanguage": ["Indonesian", "English"]
         },
         "sameAs": [
             "https://facebook.com/situneo",
-            "https://instagram.com/situneo",
             "https://twitter.com/situneo",
+            "https://instagram.com/situneo",
             "https://linkedin.com/company/situneo"
         ]
     }
     </script>
 </head>
-<body class="<?php echo $body_class ?? ''; ?>">
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="loading-content">
+            <div class="logo-container">
+                <div class="rotating-border"></div>
+                <div class="logo-pulse">
+                    <i class="fas fa-globe"></i>
+                </div>
+            </div>
+            <div class="loading-text">SITUNEO</div>
+            <div class="loading-spinner">
+                <div class="spinner-dot"></div>
+                <div class="spinner-dot"></div>
+                <div class="spinner-dot"></div>
+            </div>
+        </div>
+    </div>
 
-    <!-- Canvas for Particle Network Background -->
-    <canvas id="particle-canvas"></canvas>
+    <!-- Network Particle Background -->
+    <canvas id="network-canvas"></canvas>
 
     <!-- Circuit Pattern Overlay -->
-    <div class="circuit-overlay"></div>
-
-    <!-- Skip to main content for accessibility -->
-    <a href="#main-content" class="skip-to-main visually-hidden-focusable">Skip to main content</a>
-
-    <!-- Navigation -->
-    <?php include __DIR__ . '/navigation.php'; ?>
+    <div class="circuit-pattern"></div>
