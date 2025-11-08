@@ -3,20 +3,20 @@
     <div class="container">
         <div class="nav-wrapper">
             <!-- Logo -->
-            <a href="index.php" class="nav-logo">
+            <a href="<?php echo $baseURL ?? '/'; ?>index.php" class="nav-logo">
                 <i class="fas fa-globe"></i>
                 <span>SITUNEO</span>
             </a>
 
             <!-- Desktop Menu -->
             <ul class="nav-menu" id="navMenu">
-                <li><a href="index.php" class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'index.php') ? 'active' : ''; ?>"><?php echo $t['nav_home'] ?? 'Beranda'; ?></a></li>
-                <li><a href="about.php" class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'about.php') ? 'active' : ''; ?>"><?php echo $t['nav_about'] ?? 'Tentang'; ?></a></li>
-                <li><a href="services.php" class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'services.php') ? 'active' : ''; ?>"><?php echo $t['nav_services'] ?? 'Layanan'; ?></a></li>
-                <li><a href="portfolio.php" class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'portfolio.php') ? 'active' : ''; ?>"><?php echo $t['nav_portfolio'] ?? 'Portfolio'; ?></a></li>
-                <li><a href="pricing.php" class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'pricing.php') ? 'active' : ''; ?>"><?php echo $t['nav_pricing'] ?? 'Harga'; ?></a></li>
-                <li><a href="blog.php" class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'blog.php') ? 'active' : ''; ?>"><?php echo $t['nav_blog'] ?? 'Blog'; ?></a></li>
-                <li><a href="contact.php" class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'contact.php') ? 'active' : ''; ?>"><?php echo $t['nav_contact'] ?? 'Kontak'; ?></a></li>
+                <li><a href="<?php echo $baseURL ?? '/'; ?>index.php" class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'index.php') ? 'active' : ''; ?>"><?php echo $t['nav_home'] ?? 'Beranda'; ?></a></li>
+                <li><a href="<?php echo $baseURL ?? '/'; ?>about.php" class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'about.php') ? 'active' : ''; ?>"><?php echo $t['nav_about'] ?? 'Tentang'; ?></a></li>
+                <li><a href="<?php echo $baseURL ?? '/'; ?>services.php" class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'services.php') ? 'active' : ''; ?>"><?php echo $t['nav_services'] ?? 'Layanan'; ?></a></li>
+                <li><a href="<?php echo $baseURL ?? '/'; ?>portfolio.php" class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'portfolio.php') ? 'active' : ''; ?>"><?php echo $t['nav_portfolio'] ?? 'Portfolio'; ?></a></li>
+                <li><a href="<?php echo $baseURL ?? '/'; ?>pricing.php" class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'pricing.php') ? 'active' : ''; ?>"><?php echo $t['nav_pricing'] ?? 'Harga'; ?></a></li>
+                <li><a href="<?php echo $baseURL ?? '/'; ?>blog.php" class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'blog.php') ? 'active' : ''; ?>"><?php echo $t['nav_blog'] ?? 'Blog'; ?></a></li>
+                <li><a href="<?php echo $baseURL ?? '/'; ?>contact.php" class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'contact.php') ? 'active' : ''; ?>"><?php echo $t['nav_contact'] ?? 'Kontak'; ?></a></li>
             </ul>
 
             <!-- Right Actions -->
@@ -32,7 +32,7 @@
                 </div>
 
                 <!-- CTA Button -->
-                <a href="auth/login.php" class="btn-primary-nav">
+                <a href="<?php echo $baseURL ?? '/'; ?>auth/login.php" class="btn-primary-nav">
                     <i class="fas fa-user"></i>
                     <span><?php echo $t['nav_login'] ?? 'Masuk'; ?></span>
                 </a>
