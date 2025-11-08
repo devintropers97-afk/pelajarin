@@ -13,15 +13,17 @@
 defined('SITUNEO_ACCESS') or die('Direct access not permitted');
 
 // =============================================================================
-// DATABASE CREDENTIALS - PRODUCTION
+// DATABASE CREDENTIALS - FROM ENVIRONMENT VARIABLES
 // =============================================================================
+// Credentials are loaded from .env file for security
+// Never commit .env file to version control!
 
-define('DB_HOST', 'localhost');
-define('DB_USER', 'nrrskfvk_user_situneo_digital');
-define('DB_PASS', 'Devin1922$');
-define('DB_NAME', 'nrrskfvk_situneo_digital');
-define('DB_CHARSET', 'utf8mb4');
-define('DB_COLLATE', 'utf8mb4_unicode_ci');
+define('DB_HOST', getenv('DB_HOST') ?: 'localhost');
+define('DB_USER', getenv('DB_USER') ?: '');
+define('DB_PASS', getenv('DB_PASS') ?: '');
+define('DB_NAME', getenv('DB_NAME') ?: '');
+define('DB_CHARSET', getenv('DB_CHARSET') ?: 'utf8mb4');
+define('DB_COLLATE', getenv('DB_COLLATE') ?: 'utf8mb4_unicode_ci');
 
 // =============================================================================
 // DATABASE OPTIONS

@@ -41,6 +41,30 @@ if (version_compare(PHP_VERSION, '7.4.0', '<')) {
 date_default_timezone_set('Asia/Jakarta');
 
 // =============================================================================
+// LOAD ENVIRONMENT VARIABLES FROM .env FILE
+// =============================================================================
+
+$env_file = dirname(dirname(__FILE__)) . '/.env';
+if (file_exists($env_file)) {
+    $env_lines = file($env_file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    foreach ($env_lines as $line) {
+        // Skip comments
+        if (strpos(trim($line), '#') === 0) continue;
+
+        // Parse key=value pairs
+        if (strpos($line, '=') !== false) {
+            list($key, $value) = explode('=', $line, 2);
+            $key = trim($key);
+            $value = trim($value);
+
+            // Set environment variable
+            putenv("$key=$value");
+            $_ENV[$key] = $value;
+        }
+    }
+}
+
+// =============================================================================
 // LOAD CONFIGURATION FILES
 // =============================================================================
 
@@ -103,10 +127,18 @@ require_once CORE_PATH . 'Validator.php';
 
 require_once HELPERS_PATH . 'common.php';
 require_once HELPERS_PATH . 'formatting.php';
-require_once HELPERS_PATH . 'validation.php';
-require_once HELPERS_PATH . 'security.php';
-require_once HELPERS_PATH . 'email.php';
 require_once HELPERS_PATH . 'pricing.php';
+
+// Load optional helper files if they exist
+if (file_exists(HELPERS_PATH . 'validation.php')) {
+    require_once HELPERS_PATH . 'validation.php';
+}
+if (file_exists(HELPERS_PATH . 'security.php')) {
+    require_once HELPERS_PATH . 'security.php';
+}
+if (file_exists(HELPERS_PATH . 'email.php')) {
+    require_once HELPERS_PATH . 'email.php';
+}
 
 // =============================================================================
 // INITIALIZE DATABASE CONNECTION

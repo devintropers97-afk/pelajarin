@@ -79,15 +79,29 @@ class Database {
 
     /**
      * Prepare SQL statement
+     *
+     * @param string $sql SQL query
+     * @param array $params Optional parameters to bind automatically
+     * @return self
      */
-    public function query($sql) {
+    public function query($sql, $params = []) {
         $start_time = microtime(true);
 
         $this->statement = $this->pdo->prepare($sql);
 
+        // Auto-bind params if provided
+        if (!empty($params)) {
+            foreach ($params as $key => $value) {
+                // Add colon prefix if not present
+                $param_key = is_string($key) && strpos($key, ':') === 0 ? $key : ':' . $key;
+                $this->bind($param_key, $value);
+            }
+        }
+
         if (DB_LOG_QUERIES) {
             $this->query_log[] = [
                 'sql' => $sql,
+                'params' => $params,
                 'time' => 0,
                 'timestamp' => date('Y-m-d H:i:s')
             ];

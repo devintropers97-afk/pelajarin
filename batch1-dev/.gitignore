@@ -1,0 +1,65 @@
+# =============================================================================
+# SITUNEO DIGITAL - Git Ignore File
+# =============================================================================
+
+# Environment Variables (IMPORTANT - Never commit!)
+.env
+.env.local
+.env.*.local
+
+# Database Backups
+/backups/
+
+# Logs
+/logs/*.log
+error_log
+debug.log
+
+# Uploads
+/uploads/*
+!/uploads/.htaccess
+
+# Cache
+/cache/*
+!/cache/.htaccess
+
+# Temporary Files
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# OS Generated Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE & Editor Files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.code-workspace
+
+# Node Modules (if using npm/yarn)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Composer (if using PHP dependencies)
+/vendor/
+composer.lock
+
+# Build Files
+*.zip
+*.tar.gz
+*.rar
+
+# Local Configuration
+config/database.php.local
+config/app.php.local

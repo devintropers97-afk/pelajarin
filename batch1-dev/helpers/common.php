@@ -439,6 +439,14 @@ function get_input($key = null, $default = null) {
 }
 
 /**
+ * Get GET parameter (alias for get_input)
+ * Shorter alternative to get_input()
+ */
+function get($key = null, $default = null) {
+    return get_input($key, $default);
+}
+
+/**
  * Get client IP
  */
 function get_ip() {
