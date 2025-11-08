@@ -617,3 +617,87 @@ function json_error($message, $errors = [], $code = 400) {
         'errors' => $errors
     ], $code);
 }
+
+/**
+ * Get order status color for badges
+ */
+function order_status_color($status) {
+    return match($status) {
+        'pending' => 'warning',
+        'processing', 'in_progress' => 'info',
+        'completed' => 'success',
+        'cancelled', 'failed' => 'danger',
+        'refunded' => 'secondary',
+        default => 'secondary'
+    };
+}
+
+/**
+ * Get activity icon based on action
+ */
+function activity_icon($action) {
+    return match($action) {
+        'login' => 'box-arrow-in-right',
+        'logout' => 'box-arrow-right',
+        'register' => 'person-plus',
+        'update_profile' => 'person-gear',
+        'create_order' => 'cart-plus',
+        'update_order' => 'cart-check',
+        'create_service' => 'plus-circle',
+        'update_service' => 'pencil',
+        'update_settings' => 'gear',
+        'update_page_content' => 'file-text',
+        'password_reset' => 'key',
+        default => 'circle-fill'
+    };
+}
+
+/**
+ * Convert timestamp to "time ago" format
+ */
+function time_ago($timestamp) {
+    $time = strtotime($timestamp);
+    $diff = time() - $time;
+
+    if ($diff < 60) {
+        return $diff . ' detik yang lalu';
+    } elseif ($diff < 3600) {
+        return floor($diff / 60) . ' menit yang lalu';
+    } elseif ($diff < 86400) {
+        return floor($diff / 3600) . ' jam yang lalu';
+    } elseif ($diff < 604800) {
+        return floor($diff / 86400) . ' hari yang lalu';
+    } else {
+        return date('d M Y H:i', $time);
+    }
+}
+
+/**
+ * Check if current URL matches the given path
+ */
+function is_current_url($path, $exact = false) {
+    $current = trim(parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH), '/');
+    $check = trim($path, '/');
+
+    if ($exact) {
+        return $current === $check;
+    }
+
+    return strpos($current, $check) === 0;
+}
+
+/**
+ * Create URL-friendly slug from string
+ */
+function slugify($text) {
+    // Replace non-alphanumeric characters with hyphens
+    $text = preg_replace('/[^a-z0-9]+/i', '-', $text);
+
+    // Remove leading and trailing hyphens
+    $text = trim($text, '-');
+
+    // Convert to lowercase
+    $text = strtolower($text);
+
+    return $text;
+}
