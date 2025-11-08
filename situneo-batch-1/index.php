@@ -253,12 +253,12 @@ include 'components/layout/navigation.php';
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-bottom: 40px;">
             <?php
             $services = [
-                ['title' => 'Company Profile Website', 'price' => 'Rp 1.5JT', 'image' => '1557426272-cceb617a55d3'],
-                ['title' => 'E-Commerce / Toko Online', 'price' => 'Rp 3JT', 'image' => '1556745757-8d58faf35e7e'],
+                ['title' => 'Company Profile Website', 'price' => 'Rp 1.5JT', 'image' => '1497366216902-8fc0a8225ba3'],
+                ['title' => 'E-Commerce / Toko Online', 'price' => 'Rp 3JT', 'image' => '1556742111-a301076d9d18'],
                 ['title' => 'Landing Page', 'price' => 'Rp 800K', 'image' => '1460925895917-afdab827c52f'],
-                ['title' => 'Portfolio Website', 'price' => 'Rp 1.2JT', 'image' => '1507238691740-8b31fb9220e9'],
+                ['title' => 'Portfolio Website', 'price' => 'Rp 1.2JT', 'image' => '1467232004584-a241de8bcf5d'],
                 ['title' => 'Blog / News Website', 'price' => 'Rp 1JT', 'image' => '1499750310107-1bbf9a32504f'],
-                ['title' => 'Booking / Reservation System', 'price' => 'Rp 2.5JT', 'image' => '1554224311-f13f3c25c053'],
+                ['title' => 'Booking / Reservation System', 'price' => 'Rp 2.5JT', 'image' => '1520607162513-77705c0f0d4a'],
                 ['title' => 'Corporate Website', 'price' => 'Rp 2JT', 'image' => '1486406146456-cce4405d565b'],
                 ['title' => 'Educational Platform', 'price' => 'Rp 3.5JT', 'image' => '1503676260728-1c00da094a0b']
             ];
@@ -380,7 +380,7 @@ include 'components/layout/navigation.php';
                 ['title' => 'Real Estate', 'category' => 'Website', 'image' => '1560518883-ce4b6e6ee99a'],
                 ['title' => 'Beauty Salon', 'category' => 'Landing', 'image' => '1522337360788-8b13dee7a37e'],
                 ['title' => 'Travel Agency', 'category' => 'Website', 'image' => '1469854523690-44d8cccbc8e8'],
-                ['title' => 'Coffee Shop', 'category' => 'E-Commerce', 'image' => '1511081692775-05d0f180a065']
+                ['title' => 'Coffee Shop', 'category' => 'E-Commerce', 'image' => '1495474472287-4d71bcdd2085']
             ];
 
             foreach ($portfolios as $index => $portfolio):

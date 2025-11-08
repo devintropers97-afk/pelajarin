@@ -36,12 +36,12 @@
                 <div class="footer-col">
                     <h4 class="footer-title"><?php echo $t['footer_links'] ?? 'Tautan Cepat'; ?></h4>
                     <ul class="footer-links">
-                        <li><a href="about-new.php"><?php echo $t['nav_about'] ?? 'Tentang Kami'; ?></a></li>
-                        <li><a href="services-new.php"><?php echo $t['nav_services'] ?? 'Layanan'; ?></a></li>
-                        <li><a href="portfolio-new.php"><?php echo $t['nav_portfolio'] ?? 'Portfolio'; ?></a></li>
-                        <li><a href="pricing-new.php"><?php echo $t['nav_pricing'] ?? 'Harga'; ?></a></li>
-                        <li><a href="calculator-new.php"><?php echo $t['footer_calculator'] ?? 'Kalkulator Harga'; ?></a></li>
-                        <li><a href="career-new.php"><?php echo $t['footer_career'] ?? 'Karir'; ?></a></li>
+                        <li><a href="about.php"><?php echo $t['nav_about'] ?? 'Tentang Kami'; ?></a></li>
+                        <li><a href="services.php"><?php echo $t['nav_services'] ?? 'Layanan'; ?></a></li>
+                        <li><a href="portfolio.php"><?php echo $t['nav_portfolio'] ?? 'Portfolio'; ?></a></li>
+                        <li><a href="pricing.php"><?php echo $t['nav_pricing'] ?? 'Harga'; ?></a></li>
+                        <li><a href="calculator.php"><?php echo $t['footer_calculator'] ?? 'Kalkulator Harga'; ?></a></li>
+                        <li><a href="career.php"><?php echo $t['footer_career'] ?? 'Karir'; ?></a></li>
                     </ul>
                 </div>
 
@@ -49,12 +49,12 @@
                 <div class="footer-col">
                     <h4 class="footer-title"><?php echo $t['footer_services'] ?? 'Layanan Kami'; ?></h4>
                     <ul class="footer-links">
-                        <li><a href="services-new.php?division=web-dev"><?php echo $t['service_web_dev'] ?? 'Pembuatan Website'; ?></a></li>
-                        <li><a href="services-new.php?division=ecommerce"><?php echo $t['service_ecommerce'] ?? 'Toko Online'; ?></a></li>
-                        <li><a href="services-new.php?division=design"><?php echo $t['service_design'] ?? 'Desain Grafis'; ?></a></li>
-                        <li><a href="services-new.php?division=seo"><?php echo $t['service_seo'] ?? 'SEO & Marketing'; ?></a></li>
-                        <li><a href="services-new.php?division=mobile"><?php echo $t['service_mobile'] ?? 'Aplikasi Mobile'; ?></a></li>
-                        <li><a href="services-new.php"><?php echo $t['service_more'] ?? 'Lihat Semua'; ?></a></li>
+                        <li><a href="services.php?division=web-dev"><?php echo $t['service_web_dev'] ?? 'Pembuatan Website'; ?></a></li>
+                        <li><a href="services.php?division=ecommerce"><?php echo $t['service_ecommerce'] ?? 'Toko Online'; ?></a></li>
+                        <li><a href="services.php?division=design"><?php echo $t['service_design'] ?? 'Desain Grafis'; ?></a></li>
+                        <li><a href="services.php?division=seo"><?php echo $t['service_seo'] ?? 'SEO & Marketing'; ?></a></li>
+                        <li><a href="services.php?division=mobile"><?php echo $t['service_mobile'] ?? 'Aplikasi Mobile'; ?></a></li>
+                        <li><a href="services.php"><?php echo $t['service_more'] ?? 'Lihat Semua'; ?></a></li>
                     </ul>
                 </div>
 
