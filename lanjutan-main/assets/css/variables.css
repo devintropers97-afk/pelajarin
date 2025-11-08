@@ -1,0 +1,300 @@
+/**
+ * SITUNEO DIGITAL - TRANSCENDENT LUXURY / QUANTUM AESTHETIC
+ * "Teknologi Rasa Mewah" - The Quantum Design System
+ */
+
+:root {
+    /* ========== QUANTUM COLOR PALETTE ========== */
+
+    /* Primary Colors */
+    --deep-blue: #0A1628;        /* Background utama */
+    --royal-blue: #1B2845;       /* Section & card */
+    --gold: #D4AF37;             /* Aksen emas */
+    --platinum: #E5E4E2;         /* Teks sekunder */
+    --white: #ffffff;            /* Teks utama */
+    --neon-blue: #00D9FF;        /* Hover & efek glow */
+    --black: #0B0B0D;            /* Footer / overlay */
+
+    /* Secondary Gold Shades */
+    --gold-light: #F4D03F;       /* Bright gold untuk highlight */
+    --gold-medium: #C9A961;      /* Medium gold untuk depth */
+    --gold-dark: #8B7355;        /* Dark gold untuk shadow */
+
+    /* Accent Colors */
+    --midnight-blue: #2C4A6E;    /* Hover states */
+    --electric-cyan: #00FFF5;    /* Super bright accent */
+    --royal-purple: #6B46C1;     /* Premium badges */
+    --emerald: #10B981;          /* Success states */
+    --ruby-red: #EF4444;         /* Error/danger states */
+    --ruby-light: #FCA5A5;       /* Light red for error text */
+    --whatsapp-green: #25D366;   /* WhatsApp brand color */
+
+    /* ========== QUANTUM GRADIENTS ========== */
+
+    /* Background Gradients */
+    .bg-quantum {
+        background: linear-gradient(135deg, #0A1628, #1B2845, #2C4A6E);
+    }
+
+    .bg-gold {
+        background: linear-gradient(90deg, #F4D03F, #C9A961, #8B7355);
+    }
+
+    /* Gradient Variables */
+    --gradient-quantum: linear-gradient(135deg, #0A1628 0%, #1B2845 50%, #2C4A6E 100%);
+    --gradient-gold: linear-gradient(90deg, #F4D03F 0%, #C9A961 50%, #8B7355 100%);
+    --gradient-gold-vertical: linear-gradient(180deg, #F4D03F 0%, #D4AF37 100%);
+    --gradient-neon: linear-gradient(135deg, #00D9FF 0%, #00FFF5 100%);
+    --gradient-overlay: linear-gradient(180deg, transparent 0%, rgba(10, 22, 40, 0.95) 70%);
+    --gradient-gold-subtle: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, transparent 100%);
+
+    /* ========== GLASSMORPHISM - QUANTUM GLASS ========== */
+    --glass-ultra-light: rgba(255, 255, 255, 0.05);
+    --glass-light: rgba(255, 255, 255, 0.08);
+    --glass-medium: rgba(255, 255, 255, 0.12);
+    --glass-strong: rgba(255, 255, 255, 0.18);
+
+    --glass-border-light: rgba(255, 255, 255, 0.1);
+    --glass-border-medium: rgba(255, 255, 255, 0.15);
+    --glass-border-strong: rgba(255, 255, 255, 0.25);
+
+    --glass-gold-border: rgba(212, 175, 55, 0.3);
+    --glass-gold-border-hover: rgba(212, 175, 55, 0.6);
+
+    /* Backdrop Blur */
+    --blur-light: blur(10px);
+    --blur-medium: blur(20px);
+    --blur-strong: blur(40px);
+
+    /* ========== TYPOGRAPHY - LUXURY FONTS ========== */
+
+    /* Font Families */
+    --font-heading: 'Playfair Display', Georgia, serif;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-accent: 'Cinzel', serif;
+
+    /* Font Sizes - Elegant Scale */
+    --fs-xs: 0.75rem;       /* 12px */
+    --fs-sm: 0.875rem;      /* 14px */
+    --fs-base: 1rem;        /* 16px */
+    --fs-lg: 1.125rem;      /* 18px */
+    --fs-xl: 1.25rem;       /* 20px */
+    --fs-2xl: 1.5rem;       /* 24px */
+    --fs-3xl: 2rem;         /* 32px */
+    --fs-4xl: 2.5rem;       /* 40px */
+    --fs-5xl: 3rem;         /* 48px */
+    --fs-6xl: 4rem;         /* 64px */
+
+    /* Font Weights */
+    --fw-light: 300;
+    --fw-normal: 400;
+    --fw-medium: 500;
+    --fw-semibold: 600;
+    --fw-bold: 700;
+    --fw-extrabold: 800;
+
+    /* ========== SPACING - QUANTUM PROPORTIONS ========== */
+    --space-xs: 0.25rem;    /* 4px */
+    --space-sm: 0.5rem;     /* 8px */
+    --space-md: 1rem;       /* 16px */
+    --space-lg: 1.5rem;     /* 24px */
+    --space-xl: 2rem;       /* 32px */
+    --space-2xl: 3rem;      /* 48px */
+    --space-3xl: 4rem;      /* 64px */
+    --space-4xl: 6rem;      /* 96px */
+
+    /* ========== BORDERS & RADIUS ========== */
+    --border-glass: 1px solid var(--glass-border-light);
+    --border-glass-medium: 1px solid var(--glass-border-medium);
+    --border-glass-strong: 1px solid var(--glass-border-strong);
+    --border-gold: 1px solid var(--glass-gold-border);
+    --border-gold-strong: 2px solid var(--gold);
+
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 20px;
+    --radius-2xl: 24px;
+    --radius-full: 9999px;
+
+    /* ========== QUANTUM SHADOWS ========== */
+
+    /* Subtle shadows untuk kedalaman */
+    --shadow-xs: 0 1px 4px rgba(0, 0, 0, 0.1);
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.15);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.2);
+    --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.3);
+    --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.4);
+
+    /* Gold Glow - Multi Layer */
+    --shadow-gold-sm: 0 4px 16px rgba(212, 175, 55, 0.2);
+    --shadow-gold-md: 0 8px 32px rgba(212, 175, 55, 0.3);
+    --shadow-gold-lg: 0 12px 40px rgba(212, 175, 55, 0.4);
+    --shadow-gold-glow: 0 0 20px rgba(212, 175, 55, 0.6),
+                        0 0 40px rgba(212, 175, 55, 0.3);
+
+    /* Neon Glow */
+    --shadow-neon: 0 0 20px rgba(0, 217, 255, 0.6),
+                   0 0 40px rgba(0, 217, 255, 0.3);
+
+    /* Platinum Shine */
+    --shadow-platinum: 0 8px 24px rgba(229, 228, 226, 0.15);
+
+    /* ========== SMOOTH TRANSITIONS ========== */
+    --transition-quick: 0.2s ease;
+    --transition-normal: 0.3s ease;
+    --transition-smooth: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-luxury: 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    --transition-bounce: 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    /* ========== ANIMATION DURATIONS ========== */
+    --anim-pulse: 2s;
+    --anim-float: 3s;
+    --anim-glow: 2.5s;
+    --anim-shimmer: 3s;
+    --anim-spin: 2s;
+
+    /* ========== Z-INDEX LAYERS ========== */
+    --z-below: -1;
+    --z-base: 0;
+    --z-dropdown: 1000;
+    --z-sticky: 1010;
+    --z-fixed: 1020;
+    --z-modal-backdrop: 1030;
+    --z-modal: 1040;
+    --z-notification: 1070;
+    --z-loading: 9999;
+}
+
+/* ========== QUANTUM GLASS CARD ========== */
+.card-glass {
+    background: var(--glass-light);
+    border: var(--border-glass-medium);
+    backdrop-filter: var(--blur-medium);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    transition: all var(--transition-smooth);
+}
+
+.card-glass:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-gold-md);
+    border-color: var(--glass-gold-border-hover);
+}
+
+/* ========== GOLD GLOW BUTTON ========== */
+.btn-gold-glow {
+    background: var(--gradient-gold);
+    color: var(--deep-blue);
+    border: none;
+    padding: 1rem 2.5rem;
+    border-radius: var(--radius-full);
+    font-weight: var(--fw-bold);
+    font-size: var(--fs-lg);
+    cursor: pointer;
+    transition: all var(--transition-smooth);
+    box-shadow: var(--shadow-gold-sm);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-gold-glow::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn-gold-glow:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.btn-gold-glow:hover {
+    box-shadow: var(--shadow-gold-glow);
+    transform: translateY(-2px);
+}
+
+/* ========== UTILITY CLASSES ========== */
+
+/* Text Colors */
+.text-gold { color: var(--gold); }
+.text-platinum { color: var(--platinum); }
+.text-neon { color: var(--neon-blue); }
+.text-white { color: var(--white); }
+
+/* Gradient Text */
+.text-gradient-gold {
+    background: var(--gradient-gold);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Backgrounds */
+.bg-deep-blue { background-color: var(--deep-blue); }
+.bg-royal-blue { background-color: var(--royal-blue); }
+.bg-black { background-color: var(--black); }
+
+/* Glass Effects */
+.glass-light {
+    background: var(--glass-light);
+    backdrop-filter: var(--blur-medium);
+    border: var(--border-glass-medium);
+}
+
+.glass-medium {
+    background: var(--glass-medium);
+    backdrop-filter: var(--blur-medium);
+    border: var(--border-glass-strong);
+}
+
+/* Glow Effects */
+.glow-gold {
+    box-shadow: var(--shadow-gold-glow);
+}
+
+.glow-neon {
+    box-shadow: var(--shadow-neon);
+}
+
+/* Font Families */
+.font-heading { font-family: var(--font-heading); }
+.font-body { font-family: var(--font-body); }
+.font-accent { font-family: var(--font-accent); }
+
+/* ========== QUANTUM TEXTURE OVERLAY ========== */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+        radial-gradient(circle at 20% 50%, rgba(212, 175, 55, 0.04) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(0, 217, 255, 0.03) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: var(--z-below);
+    opacity: 0.6;
+}
+
+/* Subtle noise texture */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.025;
+    pointer-events: none;
+    z-index: var(--z-below);
+}

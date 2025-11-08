@@ -1,0 +1,437 @@
+/**
+ * QUICK FIX - Override warna yang masih salah
+ * Load terakhir di header.php untuk force consistency
+ * QUANTUM AESTHETIC FINAL ENFORCEMENT
+ */
+
+/* ========== FORCE ALL TEXT TO WHITE OR PLATINUM ========== */
+body, p, span, div, li, td, th, label {
+    color: var(--white);
+}
+
+.text-muted,
+.text-secondary,
+small.text-muted {
+    color: var(--platinum) !important;
+    opacity: 0.9;
+}
+
+/* ========== FORCE ALL BACKGROUNDS ========== */
+.card,
+.pricing-card,
+.service-card,
+.portfolio-card,
+.business-card {
+    background: var(--glass-light) !important;
+    color: var(--white) !important;
+    border: 1px solid var(--glass-gold-border) !important;
+}
+
+.card-premium {
+    background: var(--glass-light) !important;
+    backdrop-filter: var(--blur-medium) !important;
+    color: var(--white) !important;
+}
+
+/* ========== FORCE ALL BUTTONS ========== */
+.btn-primary {
+    background: var(--gradient-gold) !important;
+    color: var(--deep-blue) !important;
+    border: none !important;
+    font-weight: 600 !important;
+}
+
+.btn-outline-primary {
+    background: transparent !important;
+    color: var(--gold) !important;
+    border: 2px solid var(--gold) !important;
+}
+
+.btn-outline-primary:hover {
+    background: var(--gold) !important;
+    color: var(--deep-blue) !important;
+}
+
+/* ========== FORCE LINKS ========== */
+a {
+    color: var(--gold);
+    text-decoration: none;
+    transition: var(--transition-smooth);
+}
+
+a:hover {
+    color: var(--gold-light);
+}
+
+/* ========== FORCE HEADINGS ========== */
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+    color: var(--white) !important;
+    font-family: var(--font-heading);
+}
+
+.text-gold, .hero-stat-number {
+    color: var(--gold) !important;
+}
+
+/* ========== STAT CARDS CONSISTENCY ========== */
+.stat-card {
+    background: var(--glass-light) !important;
+    border: 1px solid var(--glass-gold-border) !important;
+    border-radius: var(--radius-xl) !important;
+    padding: 1.5rem !important;
+    transition: var(--transition-smooth);
+}
+
+.stat-card:hover {
+    border-color: var(--gold) !important;
+    box-shadow: var(--shadow-gold-md) !important;
+}
+
+.stat-card .stat-value {
+    color: var(--gold) !important;
+    font-size: 2rem !important;
+    font-weight: 700 !important;
+}
+
+.stat-card .stat-label {
+    color: var(--platinum) !important;
+    font-size: 0.9rem;
+}
+
+.stat-icon {
+    color: var(--gold) !important;
+    font-size: 2rem;
+}
+
+/* ========== PRICING TABLE TEXT VISIBILITY ========== */
+.table-comparison td,
+.table-comparison th,
+.comparison-table td,
+.comparison-table th {
+    color: var(--white) !important;
+    font-weight: 500 !important;
+    padding: 1rem !important;
+}
+
+.table-comparison .text-muted,
+.comparison-table .text-muted {
+    color: var(--platinum) !important;
+    opacity: 0.9 !important;
+}
+
+.table-comparison .highlight,
+.comparison-table .highlight {
+    background: var(--glass-medium) !important;
+    border-left: 3px solid var(--gold) !important;
+    color: var(--gold) !important;
+}
+
+/* ========== CONTACT PAGE ICONS TEXT FIX ========== */
+.contact-info-item,
+.contact-info-card {
+    color: var(--white) !important;
+}
+
+.contact-info-item i,
+.contact-icon {
+    color: var(--gold) !important;
+    font-size: 2rem;
+}
+
+.contact-info-item .text-muted,
+.contact-info-item small {
+    color: var(--platinum) !important;
+    opacity: 0.9 !important;
+}
+
+.contact-info-item a {
+    color: var(--white) !important;
+}
+
+.contact-info-item a:hover {
+    color: var(--gold) !important;
+}
+
+/* ========== FORM ELEMENTS ========== */
+.form-control,
+.form-select,
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="password"],
+textarea {
+    background: var(--glass-light) !important;
+    border: 1px solid var(--glass-border-medium) !important;
+    color: var(--white) !important;
+    border-radius: var(--radius-lg) !important;
+}
+
+.form-control:focus,
+.form-select:focus,
+input:focus,
+textarea:focus {
+    background: var(--glass-medium) !important;
+    border-color: var(--gold) !important;
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2) !important;
+    color: var(--white) !important;
+}
+
+.form-control::placeholder,
+input::placeholder,
+textarea::placeholder {
+    color: var(--platinum) !important;
+    opacity: 0.6 !important;
+}
+
+.form-label {
+    color: var(--white) !important;
+    font-weight: 500 !important;
+}
+
+/* ========== BADGES ========== */
+.badge {
+    font-weight: 600 !important;
+    padding: 0.5rem 1rem !important;
+    border-radius: var(--radius-full) !important;
+}
+
+.badge-gold {
+    background: var(--gradient-gold) !important;
+    color: var(--deep-blue) !important;
+}
+
+.badge-popular {
+    background: var(--gold) !important;
+    color: var(--deep-blue) !important;
+}
+
+/* ========== PRICING CARDS ========== */
+.pricing-card,
+.pricing-item {
+    background: var(--glass-light) !important;
+    border: 1px solid var(--glass-gold-border) !important;
+    color: var(--white) !important;
+}
+
+.pricing-popular {
+    border-color: var(--gold) !important;
+    box-shadow: var(--shadow-gold-lg) !important;
+}
+
+.price-original {
+    color: var(--platinum) !important;
+    text-decoration: line-through;
+    opacity: 0.7;
+}
+
+.price-promo {
+    color: var(--gold) !important;
+    font-size: 2.5rem !important;
+    font-weight: 700 !important;
+}
+
+/* ========== SERVICE CARDS ========== */
+.service-card {
+    background: var(--glass-light) !important;
+    border: 1px solid var(--glass-gold-border) !important;
+    color: var(--white) !important;
+    transition: var(--transition-smooth);
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--gold) !important;
+    box-shadow: var(--shadow-gold-md) !important;
+}
+
+.service-card-icon {
+    color: var(--gold) !important;
+    font-size: 3rem;
+}
+
+.service-card h3 {
+    color: var(--white) !important;
+}
+
+.service-card p {
+    color: var(--platinum) !important;
+}
+
+.service-card .text-gold {
+    color: var(--gold) !important;
+}
+
+/* ========== PORTFOLIO CARDS ========== */
+.portfolio-item,
+.portfolio-card {
+    background: var(--glass-light) !important;
+    border: 1px solid var(--glass-gold-border) !important;
+}
+
+.portfolio-item:hover {
+    border-color: var(--gold) !important;
+    box-shadow: var(--shadow-gold-md) !important;
+}
+
+/* ========== CALCULATOR PAGE ========== */
+.calculator-box,
+.cart-summary {
+    background: var(--glass-medium) !important;
+    border: 2px solid var(--gold) !important;
+    color: var(--white) !important;
+}
+
+/* ========== SEARCH BOXES ========== */
+.services-search-box input,
+.search-box input {
+    background: var(--glass-light) !important;
+    border: 2px solid var(--glass-gold-border) !important;
+    color: var(--white) !important;
+}
+
+.services-search-box input:focus,
+.search-box input:focus {
+    border-color: var(--gold) !important;
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.3) !important;
+}
+
+/* ========== FAQ ACCORDION ========== */
+.accordion-item {
+    background: var(--glass-light) !important;
+    border: 1px solid var(--glass-gold-border) !important;
+    color: var(--white) !important;
+}
+
+.accordion-button {
+    background: var(--glass-medium) !important;
+    color: var(--white) !important;
+}
+
+.accordion-button:not(.collapsed) {
+    background: var(--gold) !important;
+    color: var(--deep-blue) !important;
+}
+
+/* ========== DASHBOARD SPECIFIC ========== */
+.sidebar {
+    background: var(--glass-light) !important;
+    border-right: 1px solid var(--glass-gold-border) !important;
+}
+
+.sidebar-link {
+    color: var(--platinum) !important;
+}
+
+.sidebar-link.active,
+.sidebar-link:hover {
+    color: var(--gold) !important;
+    background: var(--glass-medium) !important;
+}
+
+/* ========== ALERTS ========== */
+.alert {
+    border-radius: var(--radius-lg) !important;
+    padding: 1rem 1.5rem !important;
+    font-weight: 500 !important;
+}
+
+.alert-success {
+    background: rgba(16, 185, 129, 0.15) !important;
+    border: 1px solid var(--emerald) !important;
+    color: var(--emerald) !important;
+}
+
+.alert-danger {
+    background: rgba(239, 68, 68, 0.15) !important;
+    border: 1px solid var(--ruby-red) !important;
+    color: var(--ruby-light) !important;
+}
+
+.alert-warning {
+    background: rgba(212, 175, 55, 0.15) !important;
+    border: 1px solid var(--gold) !important;
+    color: var(--gold-light) !important;
+}
+
+.alert-info {
+    background: rgba(0, 217, 255, 0.15) !important;
+    border: 1px solid var(--neon-blue) !important;
+    color: var(--neon-blue) !important;
+}
+
+/* ========== MODAL ========== */
+.modal-content {
+    background: var(--royal-blue) !important;
+    border: 2px solid var(--gold) !important;
+    color: var(--white) !important;
+}
+
+.modal-header {
+    border-bottom-color: var(--glass-gold-border) !important;
+}
+
+.modal-footer {
+    border-top-color: var(--glass-gold-border) !important;
+}
+
+/* ========== DROPDOWN ========== */
+.dropdown-menu {
+    background: var(--royal-blue) !important;
+    border: 1px solid var(--glass-gold-border) !important;
+}
+
+.dropdown-item {
+    color: var(--white) !important;
+}
+
+.dropdown-item:hover {
+    background: var(--glass-medium) !important;
+    color: var(--gold) !important;
+}
+
+/* ========== ENFORCE QUANTUM AESTHETIC ========== */
+* {
+    /* Ensure no random colors slip through */
+}
+
+/* ========== FINAL OVERRIDES ========== */
+.text-light {
+    color: var(--platinum) !important;
+    opacity: 0.9;
+}
+
+.text-white {
+    color: var(--white) !important;
+}
+
+.bg-dark {
+    background: var(--deep-blue) !important;
+}
+
+.bg-primary {
+    background: var(--gradient-gold) !important;
+}
+
+.border-primary {
+    border-color: var(--gold) !important;
+}
+
+/* ========== BOOTSTRAP OVERRIDES ========== */
+.text-success {
+    color: var(--emerald) !important;
+}
+
+.text-danger {
+    color: var(--ruby-light) !important;
+}
+
+.text-warning {
+    color: var(--gold) !important;
+}
+
+.text-info {
+    color: var(--neon-blue) !important;
+}
+
+/* ========== END QUICK FIX ========== */
