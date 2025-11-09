@@ -121,6 +121,17 @@ require_once CORE_PATH . 'Router.php';
 require_once CORE_PATH . 'Auth.php';
 require_once CORE_PATH . 'Validator.php';
 
+// Batch 9 - Advanced Features
+if (file_exists(CORE_PATH . 'Notification.php')) {
+    require_once CORE_PATH . 'Notification.php';
+}
+if (file_exists(CORE_PATH . 'Email.php')) {
+    require_once CORE_PATH . 'Email.php';
+}
+if (file_exists(CORE_PATH . 'Optimizer.php')) {
+    require_once CORE_PATH . 'Optimizer.php';
+}
+
 // =============================================================================
 // LOAD HELPER FUNCTIONS
 // =============================================================================
@@ -138,6 +149,14 @@ if (file_exists(HELPERS_PATH . 'security.php')) {
 }
 if (file_exists(HELPERS_PATH . 'email.php')) {
     require_once HELPERS_PATH . 'email.php';
+}
+
+// Batch 9 - Analytics & SEO helpers
+if (file_exists(HELPERS_PATH . 'analytics.php')) {
+    require_once HELPERS_PATH . 'analytics.php';
+}
+if (file_exists(HELPERS_PATH . 'seo.php')) {
+    require_once HELPERS_PATH . 'seo.php';
 }
 
 // =============================================================================
