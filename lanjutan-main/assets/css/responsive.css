@@ -1,0 +1,295 @@
+/**
+ * SITUNEO DIGITAL - Responsive Styles
+ * Mobile-first approach
+ */
+
+/* ===== TABLET (768px) ===== */
+@media (max-width: 768px) {
+    /* Typography */
+    h1 { font-size: 2.5rem; }
+    h2 { font-size: 2rem; }
+    h3 { font-size: 1.75rem; }
+
+    /* Navbar */
+    .navbar-premium {
+        padding: 1rem 0;
+    }
+
+    .navbar-collapse {
+        background: rgba(10, 22, 40, 0.98);
+        padding: 1.5rem;
+        border-radius: var(--radius-xl);
+        margin-top: 1rem;
+    }
+
+    .nav-item {
+        margin: 0.5rem 0;
+    }
+
+    .lang-switcher {
+        margin-top: 1rem;
+        justify-content: center;
+    }
+
+    /* Hero */
+    .hero-section {
+        padding: 120px 0 60px;
+        min-height: auto;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .hero-buttons .btn {
+        width: 100%;
+    }
+
+    .hero-stats {
+        gap: 2rem;
+    }
+
+    /* Sections */
+    section {
+        padding: var(--space-3xl) 0;
+    }
+
+    /* About */
+    .about-content {
+        flex-direction: column;
+    }
+
+    .about-features {
+        grid-template-columns: 1fr;
+    }
+
+    /* Services Grid */
+    .services-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    /* Portfolio */
+    .portfolio-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .portfolio-filter {
+        gap: 0.5rem;
+    }
+
+    .filter-btn {
+        font-size: var(--fs-sm);
+        padding: 8px 16px;
+    }
+
+    /* Pricing */
+    .pricing-table {
+        grid-template-columns: 1fr;
+    }
+
+    .pricing-popular {
+        transform: none;
+    }
+
+    /* Calculator */
+    .services-selection {
+        grid-template-columns: 1fr;
+    }
+
+    .cart-summary {
+        position: relative;
+        top: 0;
+    }
+
+    /* Contact */
+    .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .map-container {
+        height: 300px;
+    }
+
+    /* Dashboard */
+    .sidebar {
+        width: 100%;
+        position: relative;
+        height: auto;
+    }
+
+    .dashboard-content {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    /* Footer */
+    .footer-top .row > div {
+        text-align: center !important;
+    }
+
+    .footer-bottom-links {
+        justify-content: center;
+        margin-top: 1rem;
+    }
+
+    /* Floating Elements */
+    .floating-wa {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+        bottom: 20px;
+        right: 20px;
+    }
+
+    #backToTop {
+        width: 45px;
+        height: 45px;
+        bottom: 80px;
+        right: 20px;
+    }
+
+    .order-notification {
+        left: 10px;
+        right: 10px;
+        max-width: none;
+        bottom: 80px;
+    }
+}
+
+/* ===== MOBILE (576px) ===== */
+@media (max-width: 576px) {
+    /* Typography */
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.75rem; }
+    h3 { font-size: 1.5rem; }
+
+    /* Spacing */
+    section {
+        padding: var(--space-2xl) 0;
+    }
+
+    .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    /* Buttons */
+    .btn-gold,
+    .btn-outline-gold {
+        padding: 12px 30px;
+        font-size: var(--fs-sm);
+    }
+
+    /* Cards */
+    .card-premium {
+        padding: 1.5rem;
+    }
+
+    /* Hero */
+    .hero-section {
+        padding: 100px 0 40px;
+    }
+
+    .hero-badge {
+        padding: 8px 20px;
+        font-size: var(--fs-sm);
+    }
+
+    .hero-subtitle {
+        font-size: 1.25rem;
+    }
+
+    .hero-description {
+        font-size: var(--fs-base);
+    }
+
+    .hero-stats {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .hero-stat-number {
+        font-size: var(--fs-3xl);
+    }
+
+    /* Portfolio Filter */
+    .portfolio-filter {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .filter-btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    /* Calculator */
+    .cart-total {
+        font-size: var(--fs-2xl);
+    }
+
+    /* Contact */
+    .contact-info-item {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    /* FAQ */
+    .faq-question {
+        font-size: var(--fs-base);
+        padding: 1rem;
+    }
+
+    /* Footer */
+    .footer-top {
+        padding: var(--space-2xl) 0;
+    }
+
+    .footer-widget {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .footer-menu {
+        display: inline-block;
+        text-align: left;
+    }
+
+    .footer-social {
+        justify-content: center;
+    }
+}
+
+/* ===== LARGE DESKTOP (1400px+) ===== */
+@media (min-width: 1400px) {
+    .container {
+        max-width: 1320px;
+    }
+
+    .hero-title {
+        font-size: 5rem;
+    }
+
+    .section-title {
+        font-size: 3.5rem;
+    }
+}
+
+/* ===== EXTRA LARGE DESKTOP (1920px+) ===== */
+@media (min-width: 1920px) {
+    .container {
+        max-width: 1600px;
+    }
+
+    .hero-section {
+        min-height: 100vh;
+    }
+
+    section {
+        padding: 120px 0;
+    }
+}
